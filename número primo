@@ -1,0 +1,16 @@
+N = int(input("Digite a quantidade de números primos: "))
+cp = 0
+cr = 2
+prim = True
+if N == 0:
+    print('O programa acabou!')
+else:
+    while cp < N:
+        for c in range(2,cr):
+            if cr % c == 0:
+                prim = False
+        if prim:
+            cp += 1
+            print(cr)
+        cr += 1
+        prim = True
