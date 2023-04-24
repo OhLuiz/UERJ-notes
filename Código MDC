@@ -1,0 +1,10 @@
+##Código MDC
+A = int(input("A = "))
+B = int(input("B = "))
+mdc = 0
+while True:
+    for c in range(1,A+1):
+        if A % c == 0 and B % c == 0:
+            mdc = c          
+    break
+print(f"O mmc entre os dois números é de {mdc}")
