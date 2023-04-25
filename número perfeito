@@ -1,0 +1,12 @@
+qn = d = 0
+cn = 2
+while qn < 4:
+    for c in range(1, cn):
+        if cn % c == 0:
+            d += c
+    if d == cn:
+        print(cn)
+        qn += 1
+    d = 0
+    cn += 1
+print("Fim!")
