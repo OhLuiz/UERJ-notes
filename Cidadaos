@@ -1,6 +1,6 @@
-idam, idm, cida, cbr = 0,0,0,0
+idam, idm, cbr = 0,0,0
 nam = ''
-for c in range(0,6):
+for c in range(6):
     nome = input("Digite o nome: ")
     ida = int(input("Digite sua idade: "))
     Na = input("Digite sua nacionalidade: ").upper()
@@ -10,8 +10,7 @@ for c in range(0,6):
     if Na == "BRASILEIRO" or Na == "BRASILEIRA":
         cbr += 1
     idam += ida
-    cida += 1
-print(f"A média de idades é de {idam/cida} anos")
+print(f"A média de idades é de {idam/6} anos")
 print(f"O nome da pessoa mais velha é {nam} e a sua idade é de {idm} anos")
 if cbr > 0:
-    print(f"A quantidade de brasileiros é de {cbr}")
+    print(f"A quantidade de brasileiros é de {cbr}"
