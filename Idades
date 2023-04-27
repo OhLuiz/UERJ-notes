@@ -1,0 +1,13 @@
+pm, si, ci = 0, 0, 0
+p = int(input("Digite a idade da pessoa: "))
+while p != -1:
+    if 21 <= p <= 65:
+        pm += 1
+    si += p
+    ci += 1
+    p = int(input("Digite a idade da pessoa: "))
+if si == 0:
+    print("Não tiveram testes, obrigado por usar!")
+else:
+    print(f"A média de idade desse grupo de pessoas é {si/ci:.2f}")
+    print(f"A porcentagem de pessoas entre 21 e 65 é de {(pm/ci)*100:.2f}%")
