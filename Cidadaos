@@ -10,7 +10,7 @@ for c in range(6):
     if Na == "BRASILEIRO" or Na == "BRASILEIRA":
         cbr += 1
     idam += ida
-print(f"A média de idades é de {idam/6} anos")
+print(f"A média de idades é de {idam/6:.2f} anos")
 print(f"O nome da pessoa mais velha é {nam} e a sua idade é de {idm} anos")
 if cbr > 0:
     print(f"A quantidade de brasileiros é de {cbr}"
