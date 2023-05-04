@@ -1,0 +1,19 @@
+A = float(input("Digite o valor do coeficiente A: "))
+B = float(input("Digite o valor do coeficiente B: "))
+C = float(input("Digite o valor do coeficiente C: "))
+D = float(input("Digite o valor do coeficiente D: "))
+cr = 0
+r = 0
+for c in range(-1000,1001):
+    r = A*(c**3) + B*(c**2) + C*c + D
+    if r == 0:
+        print(f"A {cr+1} raiz é {c}")
+        cr += 1
+if cr == 0:
+    print("O intervalo não apresenta raízes para a equação")
+elif cr == 1:
+    print("O intervalo só apresentou uma raíz para a equação")
+elif cr == 2:
+    print("O intervalo só apresentou duas raízes para a equação")
+elif cr == 3:
+    print("O intervalo apresentou as três raízes da equação")
