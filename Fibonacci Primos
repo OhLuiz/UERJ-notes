@@ -1,0 +1,13 @@
+n = int(input('Digite a quantidade de termos que deseja: '))
+prim = True
+a,b = 0,1
+while n != 0:
+    if a>=2:
+        for c in range(2,a):
+            if a%c == 0:
+                prim = False
+        if prim:
+            print(a)
+            n -= 1
+    prim = True
+    a,b = b,a+b
