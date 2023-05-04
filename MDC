@@ -7,4 +7,4 @@ while True:
         if A % c == 0 and B % c == 0:
             mdc = c          
     break
-print(f"O mmc entre os dois números é de {mdc}")
+print(f"O mdc entre os dois números é de {mdc}")
