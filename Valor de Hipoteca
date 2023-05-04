@@ -1,0 +1,8 @@
+j = int(input("Digite a taxa de juros em %: "))
+j = j/100
+p = float(input("Digite o valor das parcelas: "))
+n = int(input("Digite a quantidade de parcelas: "))
+M = 0
+for c in range(0,n):
+    M += p/((1+j)**c)
+print(f"O valor total será de {M:.2f}R$")
