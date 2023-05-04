@@ -1,0 +1,14 @@
+l1 = float(input("Digite o valor do lado 1: "))
+l2 = float(input("Digite o valor do lado 2: "))
+l3 = float(input("Digite o valor do lado 3: "))
+if (l1 + l2 > l3 and l1 + l3 > l2 and l2 + l3 > l1) and (l1 - l2 < l3 and l1 - l3 < l2 and l2 - l3 < l1):
+    print("O triângulo existe e pode ser calculada a área")
+    if l1 == l2 == l3:
+        a = (l1**2)*(3**0.5)/4
+        print(f"A área do triangulo é de {a:.2f}")
+    else:
+        h = (l1*l2)/l3
+        a = h*l3/2
+        print(f"A área do triangulo é de {a:.2f}")
+else:
+    print("O triângulo não existe e não pode ser calculada a área")
