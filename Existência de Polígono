@@ -1,0 +1,12 @@
+N = float(input("Digite o valor do lado do polígono[VALOR NEGATIVO PARA ACABAR]: "))
+sN, mN = 0, 0
+
+while N > 0:
+    sN += N
+    if N > mN:
+        mN = N
+    N = float(input("Digite o valor do lado do polígono[VALOR NEGATIVO PARA ACABAR]: "))
+if sN >= mN:
+    print("O polígono não pode existir")
+else: 
+    print("O polígono existe")
