@@ -1,0 +1,24 @@
+list1 = []
+list2 = []
+listprim = []
+prim = True
+n = int(input("Digite um valor da lista 1: "))
+while n > 0:
+    list1.append(n)
+    n = int(input("Digite um valor da lista 1: "))
+    
+n = int(input("Digite um valor da lista 2: "))
+while n > 0:
+    list2.append(n)
+    n = int(input("Digite um valor da lista 2: "))
+
+for c in list1:
+    if c in list2:
+        if c != 1:
+            for f in range(2,c):
+                if c%f == 0:
+                    prim = False
+            if prim:
+                listprim.append(c)
+            prim = True
+print(f"A lista de intersseção de valores primos é de {listprim}")
