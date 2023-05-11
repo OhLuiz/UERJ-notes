@@ -1,0 +1,27 @@
+#Vetores(Dois vetores(listas) e descobrir a intersseção)
+#count(valor do elemento) -  conta a quantidade de vezes que o elemento aparece
+#sum() - soma, len() -  conta, list.append -  adiciona no final da lista
+#list.insert(posicao, valor do elemento) - colocar um elemento em uma posição na lista
+#list.pop(3) - remove o ultimo elemento e retonar o valor ou remove de uma posição dada no parâmetro
+#remove(valor do elemento) - remove a primeira ocorrência
+
+vet1 = []
+vet2 = []
+elem = int(input("Elemento: "))
+while elem >= 0:
+    vet1.append(elem)
+    elem = int(input("Elemento: "))
+print(vet1)
+
+elem = int(input("Elemento: "))
+while elem >= 0:
+    vet2.append(elem)
+    elem = int(input("Elemento: "))
+print(vet2)
+
+vet_int = []
+for c in vet1:
+    if c in vet2:
+        if c not in vet_int:
+            vet_int.append(c)
+print(vet_int)
