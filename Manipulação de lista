@@ -1,0 +1,27 @@
+r = []
+op = ''
+while op != "F":
+    op = input("Digite o que gostaria de fazer:\nA - acrescentar um valor\nR - remove um valor\nI - imprime o valor\nL - imprime a lista inteira\nF - Sair do programa\n:").upper()
+    if op == "A":
+        n = int(input("Digite o valor: "))
+        r.append(n)
+        print("Valor adicionado\n")
+    elif op == "R":
+        if len(r) == 0:
+            print("Não há valores na lista\n")
+        else:
+            print(r)
+            n = int(input("Qual valor deseja remover? "))
+            r.remove(n)
+            print("Valor removido\n")
+    elif op == "I":
+        if len(r) == 0:
+            print("Não tem valores na lista\n")
+        elif len(r) == 1:
+            print(f"A lista só tem um valor: {r}\n")
+        else:
+            n = int(input("Digite a posição do valor: "))
+            print(f"{r[n-1]}\n")
+    elif op == "L":
+        print(f"{r}\n")
+print("Fim!")
