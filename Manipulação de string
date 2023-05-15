@@ -1,0 +1,19 @@
+#str[0:5] Só irá ler até a posição 5
+#len(str) retorna q quantidade de letras da str
+#ord('a') retorna em que número o caractere aparece
+#split() quebra a string
+#str_a.count('a',0,3) - quantas vezes a letra a aparece na string de 0 a 2
+#isalpha() diz se todos os caracteres são letras
+#isdigit() diz se todos os caractetes são números
+nam = input("Digite um texto qualquer: ")
+l = n = ca = 0
+for c in nam:
+    if c.isalpha():
+        l += 1
+    elif c.isdigit():
+        n += 1
+    else:
+        ca += 1
+print(f"A quantidade de letras é {l}")
+print(f"A quantidade de números é {n}")
+print(f"A quantidade de outros caracteres específicos é {ca}")
