@@ -1,0 +1,10 @@
+##Biblioteca é chamada também de módulo, onde podemos usar funções predefinidas
+##from math import * Nesse caso importa todas as funções sem precisar usar math.função()
+##from math import sqrt, pi Irá importar só a função sqrt e pi
+##from math import sqrt
+n = int(input("DIgite a quantidade de termos: "))
+suma = 0
+for c in range(1,n+1):
+    suma += c**0.5
+print(f"{suma:.2f}")
+
