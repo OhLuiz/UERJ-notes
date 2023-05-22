@@ -1,0 +1,13 @@
+vetor = [7.5,8.0,5.5,9.0,4.5,8.0,5.5,6.0,10.0]
+valor = float(input("Entre com o valor a procurar: "))
+posicao = 0
+posicao1 = []
+for i in range(0,len(vetor)):
+    if vetor[i] == valor:
+        posicao1.append(i+1)
+    
+if len(posicao1) > 0:
+    print(f"As posições que o valor se encontram são: {posicao1}")
+
+else:
+    print("Valor não encontrado")
