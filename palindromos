@@ -1,0 +1,9 @@
+nam = input("Digite qualquer coisa: ").replace(" ", "")
+nam1 = ''
+num = -1*len(nam)-1
+for c in range(-1,num,-1):
+    nam1 += nam[c]
+if nam1 == nam:
+    print("O que foi digitado é um palíndromo")
+else:
+    print("Não é um palindromo")
