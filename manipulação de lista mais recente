@@ -1,0 +1,26 @@
+lista = [10,15,20,30,30,35,34,35,4,8,45,61,456,64,231,64,2,2,2,1,48,5,6,5,68,6,4,2,2,1,10,15]
+desvio = []
+ct = cta =  mod = dv = 0
+qt = len(lista)
+maxi = max(lista)
+mini = min(lista)
+med = sum(lista)/qt
+lista.sort()
+if qt%2 == 0:
+    medi = (lista[(qt/2) + 1] + lista[(qt/2) - 1])/2
+else:
+    medi = qt/2 - 1
+for c in lista:
+    ct = lista.count(c)
+    if ct > cta:
+        mod = c
+        cta = ct
+    dv = c-med
+    if dv < 0:
+        dv = dv*-1
+    desvio.append(dv)
+dv = sum(desvio)/len(desvio)
+print(f"O maior numero foi {maxi} e o menor {mini}")
+print(f"A Média foi de {med} e seu desvio padrão de {dv}")
+print(f"Sua mediana foi de {medi} e sua moda foi {mod} aparecendo {cta} vezes")
+        
