@@ -1,0 +1,25 @@
+vetor = [7.5,8.0,5.5,9.0,4.5,8.0,5.5,6.0,10.0]
+#busca binária
+#inicio = 0; fim = ult posicao;meio = (inicio+fim/2)-1
+#valor procurado = y; vetor(meio) = x; se x menor que y, será procurado do meio para baixo e vice-versa
+#é necessário ter uma lista organizada
+valor = float(input("Digite o valor a ser procurado: "))
+inicio = 0
+fim = len(vetor)
+achou = False
+vetor.sort()
+while (not achou) and (inicio <= fim):
+    meio = (inicio + fim)/2
+    if fim%2 != 0:
+        meio = floor(meio)
+    if valor == vetor[meio]:
+        achou = True
+    elif valor < vetor[meio]:
+        fim = meio-1
+    else:
+        inicio = meio+1
+
+if achou:
+    print("Valor encontrado na posição {meio}")
+else:
+    print("Valor não encontrado")
