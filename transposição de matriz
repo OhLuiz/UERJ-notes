@@ -1,0 +1,19 @@
+from random import randint
+linhas = int(input("Linhas: "))
+colunas = int(input("Colunas: "))
+A = []
+for i in range(linhas):
+    l = []
+    for j in range(colunas):
+        l.append(randint(0,9))
+    A.append(l)
+for linha in A:
+    print(linha)
+At = []
+for i in range(colunas):
+    lt = []
+    for j in range(linhas):
+        lt.append(A[j][i])
+    At.append(lt)
+for linha in At:
+    print(linha)
