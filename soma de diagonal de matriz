@@ -1,0 +1,16 @@
+from random import randint
+linhas = int(input("Linhas: "))
+colunas = int(input("Colunas: "))
+A = []
+for i in range(linhas):
+    l = []
+    s = 0
+    for j in range(colunas):
+        l.append(randint(1,7))
+    A.append(l)
+for linha in A:
+    print(linha)
+soma = 0
+for i in range(0, linhas):
+    soma += A[i][i]
+print(f"Soma da diagonal principal: {soma}")
