@@ -1,0 +1,34 @@
+##import copy
+###listb = copy.deepcopy(lista); mais fácil que listb = lista[:][:]
+from random import randint
+linhas = int(input("Linhas: "))
+colunas = int(input("Colunas: "))
+A = []
+B = []
+n = int(input("Digite valores para a lista(999999 para parar): "))
+while n != 999999:
+     B.append(n)
+     n = int(input("Digite valores para a lista(999999 para parar): "))
+for i in range(linhas):
+    l = []
+    s = 0
+    for j in range(colunas):
+        l.append(randint(1,7))
+    A.append(l)
+print("Matriz A")
+for linha in A:
+    print(linha)
+print("Matriz B")
+for linha in B:
+    print(f"[{linha}]")
+if len(A[0]) == len(B):
+    C = []
+    for c in range(len(A)):
+        soma = 0
+        for v in range(len(B)):
+            soma += A[c][v]*B[v]
+        C.append(soma)
+    print(f"Matriz C: {C}")
+else:
+    print("Não é possível multiplicar")
+#Multiplicação de matrizes
