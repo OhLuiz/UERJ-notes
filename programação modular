@@ -1,0 +1,42 @@
+##programação modular - criar funções
+##def nome_funcao(argumento1,...,argumentoN):
+##  intrucao1
+##  instrucaoN
+##  return saida
+
+##Esse a quantidade de números é predefinida
+##def soma(x,y):
+##    return x + y
+
+##Esse pode-se colocar a quantidade de números que quiser
+##def soma(*num):
+##    s = 0
+##    for n in num:
+##        s += n
+##    return s
+
+##função para descobrir se um número é primo
+##def primo(num):
+##    prim = True
+##    for c in range(2, num):
+##        if num%c == 0:
+##            prim = False
+##    return prim
+
+##from random import randint
+##
+##def cria_matriz(l,c,i,f):
+##    A = []
+##    for i in range(l):
+##        linha = []
+##        for j in range(c):
+##            linha.append(randint(i,f))
+##        A.append(linha)
+##    return A
+##
+##def escrever_matriz(mat):
+##    for linha in mat:
+##        print(linha)
+##
+##M = cria_matriz(6,6,2,12)
+##escrever_matriz(M)
