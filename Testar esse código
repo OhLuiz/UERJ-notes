@@ -1,0 +1,47 @@
+def media(vetor):
+    s = sum(vetor)
+    qt = len(vetor)
+    return s/qt
+def mediana(lista):
+    lista.sort()
+    qt = len(lista)
+    if qt%2 == 0:
+        return (lista[(qt/2)] + lista[(qt/2) - 1])/2
+    else:
+        return qt//2
+def moda(vetor):
+    moda  = []
+    max_frequencia = 0
+    contador = 0
+    for i in range(len(vetor)):
+        if i > 0 and vetor[i] == vetor[i - 1]:
+            contador += 1
+        else:
+            contador = 1
+        if contador > max_frequencia:
+            moda = [vetor[i]]
+        elif contador == max_frequencia:
+            moda.append(vetor[i])
+    return moda
+def desvio(vetor):
+    med = media(vetor)
+    d = []
+    dv = 0
+    for c in vetor:
+        dv = med - c
+        if dv < 0:
+            dv = dv*-1
+        d.append(dv)
+    qt = len(d)
+    s = sum(d)
+    return qt/s
+n = float(input("Digite um valor[9999 para parar]: "))
+lista = []
+while n != 9999:
+    lista.append(n)
+    n = float(input("Digite um valor[9999 para parar]: "))
+print(f"media: {media(lista)}")
+print(f"mediana: {mediana(lista)}")
+print(f"moda: {moda(lista)}")
+print(f"desvio: {desvio(lista)}")
+    
