@@ -1,0 +1,20 @@
+def bubble_sort(vetor):
+    for i in range(len(vetor)-1):
+        for j in range(i+1,len(vetor)):
+            if vetor[j] < vetor[i]:
+                vetor[j],vetor[i] = vetor[i],vetor[j]
+def mediana(vetor):
+    med = 0
+    bubble_sort(vetor)
+    if len(vetor)%2 == 0:
+        m1 = vetor[len(vetor/2)]
+        m2 = vetor[len(vetor/2 - 1)]
+        return (m1+m2)/2
+    else:
+        return vetor[len(vetor)//2]
+vector = []
+v = int(input("Digite os números a apresentar no vetor[Digite 9999 para parar]: "))
+while v != 9999:
+    vector.append(v)
+    v = int(input("Digite os números a apresentar no vetor[Digite 9999 para parar]: "))
+print(f"Mediana: {mediana(vector)}")
