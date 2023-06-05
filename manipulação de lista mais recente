@@ -7,9 +7,9 @@ mini = min(lista)
 med = sum(lista)/qt
 lista.sort()
 if qt%2 == 0:
-    medi = (lista[(qt/2) + 1] + lista[(qt/2) - 1])/2
+    medi = (lista[(qt/2)] + lista[(qt/2) - 1])/2
 else:
-    medi = qt/2 - 1
+    medi = qt//2
 for c in lista:
     ct = lista.count(c)
     if ct > cta:
