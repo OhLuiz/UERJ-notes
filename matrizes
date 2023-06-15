@@ -1,0 +1,72 @@
+def cria_matriz(l, c):
+    A = []
+    for i in range(l):
+        linha = []
+        for j in range(c):
+            linha.append(int(input(f"Elemento[{i}][{j}]: ")))
+        A.append(linha)
+    return A
+
+def cria_matrizA(l, c, i, f):
+    from random import randint
+    A = []
+    for i in range(c):
+        linha = []
+        for j in range(l):
+            linha.append(randint(0,9))
+        A.append(linha)
+    return A
+
+def imprime_matriz(mat):
+    for linha in mat:
+        print(mat)
+        
+def soma_matriz(M1,M2):
+    S = []
+    for i in range():
+        linha = []
+        for j in range(len(M1[0])):
+            linha.append(M1[i][j] + M2[i][j])
+        S.append(linha)
+    return S
+
+def mult_matriz(M1,M2):
+    S = []
+    for i in range(len(M1)):
+        l = []
+        for j in range(len(M2[0])):
+            soma = 0
+            for k in range(len(M1[0])):
+                soma += M1[i][k] * M2[k][j]
+                
+n1 = int(input("Linhas de M1: "))
+c1 = int(input("Colunas de M1: "))
+opcao = input("1 - Criar matriz informando elemento\n2 - Criar matriz aleatória\n")
+if opcao == '1':
+    mat1 = cria_matriz(n1,c1)
+    imprime_matriz(mat1)
+if opcao == "2":
+    inicio = int(input("inicio do intervalo: "))
+    fim = int(input("Fim do intervalo: "))
+    mat1 = matriz = cria_matrizA(n1, c1, inicio , fim)
+    imprime_matriz(mat1)
+n2 = int(input("Linhas de M2: "))
+c2 = int(input("Colunas de M2: "))
+opcao = input("1 - Criar matriz informando elemento\n2 - Criar matriz aleatória\n")
+if opcao == '1':
+    mat2 = cria_matriz(n2,c2)
+    imprime_matriz(mat2)
+if opcao == "2":
+    inicio = int(input("inicio do intervalo: "))
+    fim = int(input("Fim do intervalo: "))
+    mat2 = matriz = cria_matrizA(n2, c2, inicio , fim)
+    imprime_matriz(mat2)
+
+opcao = input("1 - M1 + M2\n2 - M1 x M2\n")
+if opcao == "1":
+    if n1 == n2 and c1 == c2:
+        imprime_matriz(soma_matriz(mat1,mat2))
+    else:
+        print("As dimensões não batem")
+if opcao == "2":
+    if M1[0] == M2:
