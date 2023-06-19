@@ -22,13 +22,13 @@ print("Matriz B")
 for linha in B:
     print(f"[{linha}]")
 if len(A[0]) == len(B):
-    C = []
-    for c in range(len(A)):
-        soma = 0
-        for v in range(len(B)):
-            soma += A[c][v]*B[v]
-        C.append(soma)
-    print(f"Matriz C: {C}")
+    S = []
+    for i in range(len(M1)):
+        l = []
+        for j in range(len(M2[0])):
+            soma = 0
+            for k in range(len(M1[0])):
+                soma += M1[i][k] * M2[k][j]
 else:
     print("Não é possível multiplicar")
 #Multiplicação de matrizes
