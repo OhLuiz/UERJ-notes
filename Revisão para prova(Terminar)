@@ -80,7 +80,7 @@ def matrans(mat):
     At = []
     for i in range(qtde(mat)):
         lt = []
-        for j in range(qtde(mat[0]):
+        for j in range(qtde(mat[0])):
             lt.append(mat[j][i])
         At.append(lt)
     return At
@@ -133,5 +133,3 @@ print("Matriz transposta: ")
 matT = matrans(mat)
 for elem in matT:
     print(elem)
-
-                
