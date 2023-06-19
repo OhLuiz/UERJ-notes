@@ -1,0 +1,137 @@
+##Funções para lista
+##Não pode usar len() nem o sum(), nem o sort(), por isso o bubblesort
+##a) Quantidade de termos
+def qtde(lista):
+    q = 0
+    for elem in lista:
+        q+=1
+    return q
+##b) Retorna a soma dos elementos
+def soma(lista):
+    s = 0
+    for elem in lista:
+        s += elem
+    return s
+##c) Retorna média dos elementos
+def media(lista):
+    q = 0
+    s = 0
+    for elem in lista:
+        q += 1
+        s += elem
+    return s/q
+##d) Retorna o menor elemento
+def min(lista):
+    if qtde(lista) == 0:
+        return "Lista vazia"
+    else:
+        m = lista[0]
+        for elem in lista:
+            if elem < m:
+                m = elem
+    return m
+##e) retorna o maior elemento
+def max(lista):
+    if qtde(lista) == 0:
+        return "Lista vazia"
+    else:
+        M = lista[0]
+        for elem in lista:
+            if elem > M:
+                M = elem
+##f) retorna a lista em ordem
+def bubble_sort(vetor):
+    for i in range(len(vetor)-1):
+        for j in range(i+1,len(vetor)):
+            if vetor[j] < vetor[i]:
+                vetor[j],vetor[i] = vetor[i],vetor[j]
+##Funções recebe uma matriz
+#a) Retorna a quantidade de elementos pares da matriz
+def par(mat):
+    p = []
+    for c in mat:
+        for elem in c:
+            if elem%2 == 0:
+                p.append(elem)
+    return p, qtde(p)
+## b) Retorna a quantidade de elementos primos da matriz
+def primo(mat):
+    p = []
+    for c in mat:
+        for elem in c:
+            primo = True
+            for i in range(2, elem):
+                if elem%i == 0:
+                    primo = False
+            if primo:
+                p.append(elem)
+    return p, qtde(p)
+## c) Retorna a soma dos elementos da diagonal principal
+def somad(mat):
+    s = 0
+    if len(mat) != len(mat[0]):
+        return "Não tem como somar a diagonal"
+    else:
+        for c in range(qtde(mat)):
+            s += mat[c][c]
+        return s
+## d) Retorna matriz transposta
+def matrans(mat):
+    At = []
+    for i in range(qtde(mat)):
+        lt = []
+        for j in range(qtde(mat[0]):
+            lt.append(mat[j][i])
+        At.append(lt)
+    return At
+def cria_matriz(l, c):
+    A = []
+    for i in range(l):
+        linha = []
+        for j in range(c):
+            linha.append(int(input(f"Elemento[{i}][{j}]: ")))
+        A.append(linha)
+    return A
+
+def cria_matrizA(l, c, i, f):
+    from random import randint
+    A = []
+    for i in range(c):
+        linha = []
+        for j in range(l):
+            linha.append(randint(0,9))
+        A.append(linha)
+    return A
+
+ch = int(input("Deseja criar uma matriz:\n1-Aleatória\n2-Escolhendo elementos\n"))
+if ch == 1:
+    n = int(input("Linhas: "))
+    c = int(input("Colunas: "))
+    i = int(input("Inicio: "))
+    f = int(input("Fim: "))
+    mat = cria_matrizA(n,c,i,f)
+    print("Matriz:")
+    for elem in mat:
+        print(elem)
+if ch == 2:
+    n = int(input("Linhas: "))
+    c = int(input("Colunas: "))
+    mat = cria_matriz(n,c)
+    print("Matriz:")
+    for elem in mat:
+        print(elem)
+print("Números pares da matriz: ", end = "")
+print(par(mat))
+
+print("Números primos da matriz: ", end = "")
+print(primo(mat))
+
+print("Soma da diagonal principal: ", end = "")
+print(somad(mat))
+
+print("Matriz transposta: ")
+matT = matrans(mat)
+for elem in matT:
+    print(elem)
+
+                
