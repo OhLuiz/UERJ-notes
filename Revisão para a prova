@@ -1,213 +1,228 @@
-def qte(lista):
-    q = 0
-    for m in lista:
-        q +=1
-    return q
+qte(lista):
+    q = 0
+    for m in lista:
+        q +=1
+    return q
+
 def converter_F(lista):
-    F = []
-    for c in lista:
-        F.append((c*9/5) + 32)
-    return F
-def tiraespaco(n):
-    nam = ""
-    for c in n:
-        if c != " " or c != "":
-            nam += c
-    return nam
+    F = []
+    for c in lista:
+        F.append((c*9/5) + 32)
+    return F
+
+def tiraespaco(n): def
+    nam = ""
+    for c in n:
+        if c != " " or c != "":
+            nam += c
+    return nam
+
 def mat_maior_10(mat):
-    q = 0
-    for c in mat:
-        for m in c:
-            if m < 10:
-                q += 1
-    return q
+    q = 0
+    for c in mat:
+        for m in c:
+            if m > 10:
+                q += 1
+    return q
+
 def MDC(a,b):
-    m = 0
-    for c in range(1,a+1):
-        if a%c == 0 and b%c == 0:
-            if c > m:
-                m = c
-    return m
+    m = 0
+    for c in range(1,a+1):
+        if a%c == 0 and b%c == 0:
+            if c < m:
+                m = c
+    return m
+
 def MMC(a,b):
-    m = x = 1
-    for c in range(1,x):
-        if a%c == 0 and a%c == 0:
-            m *= c
-            a = a/c
-            b = b/c
-        elif a%c != 0 and a % c == 0:
-            m *= c
-            b = b/c
-        elif a%c == 0 and a % c != 0:
-            m *= c
-            a = a/c
-        if a == 1 and b == 1:
-            break
-            return m
-    x+=1
+    m = x = 1
+    for c in range(1,x):
+        if a%x == 0 and a%b == 0:
+            m *= c
+            a = a/c
+            b = b/c
+        elif a%x != 0 and a % b == 0:
+            m *= c
+            b = b/c
+        elif a%x == 0 and a % b != 0:
+            m *= c
+            a = a/c
+        if a == 1 and b == 1:
+            break
+    return m
+
 def determinante(mat):
-    n = qte(mat)
+    n = qte(mat)
 
-    # Verificar se a matriz é quadrada
-    if n != qte(mat[0]):
-        raise ValueError("A matriz precisa ser quadrada.")
+    # Verificar se a matriz é quadrada
+    if n != qte(mat[0]):
+        raise ValueError("A matriz precisa ser quadrada.")
 
-    # Caso base para matriz 1x1
-    if n == 1:
-        return mat[0][0]
+    # Caso base para matriz 1x1
+    if n == 1:
+        return mat[0][0]
 
-    # Caso base para matriz 2x2
-    if n == 2:
-        return mat[0][0] * mat[1][1] - mat[0][1] * mat[1][0]
+    # Caso base para matriz 2x2
+    if n == 2:
+        return mat[0][0] * mat[1][1] - mat[0][1] * mat[1][0]
 
-    det = 0
-    for coluna in range(n):
-        # Cálculo do cofator
-        cofator = (-1) ** coluna * mat[0][coluna]
+    det = 0
+    for coluna in range(n):
+        # Cálculo do cofator
+        cofator = (-1) ** coluna * mat[0][coluna]
 
-        # Montar a submatriz
-        sub = []
-        for linha in range(1, n):
-            sub.append(mat[linha][:coluna] + mat[linha][coluna + 1:])
+        # Montar a submatriz
+        sub = []
+        for linha in range(1, n):
+            sub.append(mat[linha][:coluna] + mat[linha][coluna + 1:])
 
-        # Chamada recursiva para a submatriz
-        det += cofator * determinante(sub)
+        # Chamada recursiva para a submatriz
+        det += cofator * determinante(sub)
 
-    return det
+    return det
+
 def det3x3(mat):
-    det = mat[0][0]*mat[1][1]*mat[2][2] + mat[0][1]*mat[1][2]*mat[2][0] + mat[0][2]*mat[1][0]*mat[2][1]
-    det -= mat[0][2] * mat[1][1] * mat[2][0] + mat[0][1] * mat[1][0] * mat[2][2] + mat[0][0] * mat[1][2] * mat[2][1]
-    return det
+    det = mat[0][0]*mat[1][1]*mat[2][2] + mat[0][1]*mat[1][2]*mat[2][0] + mat[0][2]*mat[1][0]*mat[2][1]
+    det -= mat[0][2] * mat[1][1] * mat[2][0] + mat[0][1] * mat[1][0] * mat[2][2] + mat[0][0] * mat[1][2] * mat[2][1]
+    return det
 ##Revisão para a prova
 
 ##Matriz Transposta
 def matTrans(mat):
-    At = []
-    for c in range(qte(mat[0])):
-        l = []
-        for m in range(qte(mat)):
-           l.append(mat[m][c])
-        At.append(l)
-    return At
+    At = []
+    for c in range(qte(mat[0])):
+        l = []
+        for m in range(qte(mat)):
+           l.append(mat[m][c])
+        At.append(l)
+    return At
+
 ##Criar vetor aleatório
 def cvetA(q,i,f):
-    A = []
-    from random import randint
-    for c in range(q):
-        A.append(randint(i,f))
-    return A
+    A = []
+    from random import randint
+    for c in range(q):
+        A.append(randint(i,f))
+    return A
+
 ##Criar vetor escolhendo a posição
 def cvet():
-    A = []
-    while True:
-        try:
-            A.append(int(input(f"Digite o valor poisção da posição {qte(A)}[letra para acabar]")))
-        except:
-            A.pop(qte(A)-1)
-            break
-    return A
+    A = []
+    while True:
+        try:
+            A.append(int(input(f"Digite o valor poisção da posição {qte(A)}[letra para acabar]")))
+        Except:
+            break
+    return A
+
 ##organizar o vetor em ordem crescente
 def ordc(vet):
-    for c in range(0,qte(vet)-1):
-        for m in range(c + 1, qte(vet)):
-            if vet[m] < vet[c]:
-                vet[m], vet[c] = vet[c], vet[m]
+    for c in range(0,qte(vet)-1):
+        for m in range(c + 1, qte(vet)):
+            if vet[m] < vet[c]:
+                vet[m], vet[c] = vet[c], vet[m]
+
 ##Organizar o vetor em ordem decrescente
 def ordd(vet):
-    for c in range(0,qte(vet)-1):
-        for m in range(c + 1, qte(vet)):
-            if vet[m] > vet[c]:
-                vet[m], vet[c] = vet[c], vet[m]
+    for c in range(0,qte(vet)-1):
+        for m in range(c + 1, qte(vet)):
+            if vet[m] > vet[c]:
+                vet[m], vet[c] = vet[c], vet[m]
+
 ##Calculos estatísticos de vetores:
 def media(lista):
-    s = 0
-    for c in lista:
-        s += c
-    return s/qte(lista)
+    s = 0
+    for c in lista:
+        s += c
+    return s/qte(lista)
 def mod(vet):
-    ct = cta = mod = 0
-    for c in vet:
-        ct = vet.count(c)
-        if ct > cta:
-            mod = c
-            cta = ct
-    return mod
+    ct = cta = mod = 0
+    for c in vet:
+        ct = vet.count(c)
+        if ct > cta:
+            mod = c
+            cta = ct
+    return mod
 def mediana(vet):
-    med = 0
-    qt = qte(vet)
-    if qt%2 == 0:
-        med = (vet[(qt)/2 - 1] + vet[(qt)/2])/2
-    else:
-        med = vet[(qt)//2]
+    med = 0
+    qt = qte(vet)
+    if qt%2 == 0:
+        med = (vet[(qt)/2 - 1] + vet[(qt)/2])/2
+    else:
+        med = vet[(qt)//2]
 def est(vet):
-    d = dq = mo = me = med = q = 0
-    ordc(vet)
-    mo = mod(vet)
-    me = mediana(vet)
-    med = media(vet)
-    for c in vet:
-        if med - c < 0:
-            d += -1*(med - c)
-            q += 1
-        else:
-            d += (med - c)
-            q += 1
-        dq += (med - c)**2
-    d = d/q
-    dq = dq/q
-    return print(f"Moda: {mo:.2f}, Mediana: {me:.2f}, Média: {med:.2f}, Devio médio: {d:.2f}, Desvio Quadrático: {dq:.2f}")
+    d = dq = mo = me = med = q = 0
+    ordc(vet)
+    mo = mod(vet)
+    me = mediana(vet)
+    med = media(vet)
+    for c in vet:
+        if med - c < 0:
+            d += -1*(med - c)
+            q += 1
+        else:
+            d += (med - c)
+            q += 1
+        dq += (med - c)**2
+    d = d/q
+    dq = dq/q
+    return print(f"Moda: {mo:.2f}, Mediana: {me:.2f}, Média: {med:.2f}, Devio médio: {d:.2f}, Desvio Quadrático: {dq:.2f}")
+
 #cria matriz aleatória
 def cria_matrizA(l,c,i,f):
-    from random import randint
-    A = []
-    for m in range(l):
-        lt = []
-        for n in range(c):
-            lt.append(randint(i,f))
-        A.append(lt)
-    return A
+    from random import randint
+    A = []
+    for m in range(l):
+        lt = []
+        for n in range(c):
+          lt.append(randint(i,f))
+        A.append(lt)
+    return A
 #cria matriz escolhendo
 def cria_matriz(l,c):
-    A = []
-    for m in range(l):
-        lt = []
-        for n in range(c):
-            lt.append(int(input(f"Digite o termo da posição[{m}][{n}]")))
-        A.append(lt)
-    return A
+    A = []
+    for m in range(l):
+        lt = []
+        for n in range(c):
+            lt.append(int(input(f"Digite o termo da posição[{m}][{n}]")))
+        A.append(lt)
+    return A
+
 #soma matrizes
 def somaMat(mat1,mat2):
-    C = []
-    for c in range(qte(mat1)):
-        l = []
-        for m in range(qte(mat1[0])):
-            l.append(mat1[c][m] + mat2[c][m])
-        C.append(l)
-    return C
+    C = []
+    for c in range(qte(mat1)):
+        l = []
+        for m in range(qte(mat1[0])):
+            l.append(mat1[c][m] + mat2[c][m])
+        C.append(l)
+    return C
+
 #multiplica matrizes
 def multiMat(mat1,mat2):
-    C = []
-    for c in range(qte(mat1)):
-        l = []
-        for m in range(qte(mat2[0])):
-            s = 0
-            for n in range(qte(mat1[0])):
-                s += mat1[c][n]*mat2[n][m]
-            l.append(s)
-        C.append(l)
-    return C
+    C = []
+    for c in range(qte(mat1)):
+        l = []
+        for m in range(qte(mat2[0])):
+            s = 0
+            for n in range(qte(mat1[0])):
+                s += mat1[c][n]*mat2[n][m]
+            l.append(s)
+        C.append(l)
+    return C
+
 #mostra matrizes
 def showMat(mat):
-    for elem in mat:
-        print(elem)
-    print()
+    for elem in mat:
+        print(elem)
+    print()
 
-# a) Retorna a quantidade de elementos pares da matriz # M = [[1, 2], [3, 4], [5, 6]] 
-def pares(M):     
-  q = 0     
-  for linha in M:         
-    for elem in linha:             
-      if elem % 2 == 0:                 
-        q += 1     
-  return q
-def moda1(vetor):     max_frequencia = 0     moda = []     for elem in vetor:         freq = 0         for j in vetor:             if j == elem:                 freq += 1         if freq > max_frequencia:             max_frequencia = freq             moda = [elem]         if freq == max_frequencia and elem not in moda:             moda.append(elem)     return moda
+ 
+
+#Primo
+def primo(n):
+  prim = True
+  for c in range(2,n):
+    if n%c == 0 and n!=2:
+      prim = False
+  return prim
+
