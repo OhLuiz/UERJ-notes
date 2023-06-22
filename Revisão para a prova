@@ -18,7 +18,7 @@ def mat_maior_10(mat):
     q = 0
     for c in mat:
         for m in c:
-            if m > 10:
+            if m < 10:
                 q += 1
     return q
 def MDC(a,b):
@@ -200,3 +200,13 @@ def showMat(mat):
     for elem in mat:
         print(elem)
     print()
+
+# a) Retorna a quantidade de elementos pares da matriz # M = [[1, 2], [3, 4], [5, 6]] 
+def pares(M):     
+  q = 0     
+  for linha in M:         
+    for elem in linha:             
+      if elem % 2 == 0:                 
+        q += 1     
+  return q
+
