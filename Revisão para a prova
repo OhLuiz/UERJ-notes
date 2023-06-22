@@ -209,4 +209,4 @@ def pares(M):    
       if elem % 2 == 0:                 
         q += 1     
   return q
-
+def moda1(vetor):     max_frequencia = 0     moda = []     for elem in vetor:         freq = 0         for j in vetor:             if j == elem:                 freq += 1         if freq > max_frequencia:             max_frequencia = freq             moda = [elem]         if freq == max_frequencia and elem not in moda:             moda.append(elem)     return moda
