@@ -1,0 +1,25 @@
+n1 = float(input("Digite a nota da P1: "))
+n2 = float(input("Digite a nota da P2: "))
+lista11 = float(input("Digite a nota da lista 1 da P1: "))
+lista12 = float(input("Digite a nota da lista 2 da P1: "))
+lista21 = float(input("Digite a nota da lista 1 da P2: "))
+lista22 = float(input("Digite a nota da lista 2 da P2: "))
+notaT = float(input("Digite a nota do trabalho: "))
+
+media1 = n1*0.35 + (lista11+lista12)*0.15/2
+media2 = n2*0.35 + (lista21+lista22)*0.15/2
+media = (media1 + media2)*0.8 + notaT*0.2
+
+if media >= 7:
+    print(f"Aluno aprovado com média {media:.2f}")
+elif media >= 4 and media < 7:
+    print(f"O aluno precisará fazer uma prova final, pois sua média é de {media:.2f}")
+    nf = float(input("Digite a nota da prova final: "))
+    media = (media + nf)/2
+    if media >= 5:
+        print(f"Aluno aprovado com média {media:.2f}")
+    else:
+        print(f"Aluno reprovado com média {media:.2f}")
+else:
+    print(f"Aluno reprovado com média {media:.2f}")
+    
