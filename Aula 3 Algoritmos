@@ -1,0 +1,82 @@
+from math import * #desse modo importa toda a lib sem precisar citá-la
+#poderia escrever como import math as m, ai não precisa usar math e sim m
+
+import turtle as t
+
+##def calcula_circunf(raio):
+##    '''Retorna o valor da cicrunferência do circulo'''
+##    circun = raio*2*pi
+##    return circun
+##
+##def calcula_area_circulo(raio):
+##    '''Retorna a área do circulo com o raio digitado'''
+##    area = pi*(raio**2)
+##    return area
+##
+##def calcula_hipotenusa(c1,c2):
+##    '''Retorna o valor da hipotenusa com os valores de cateto 1(c1) e cateto 2(c2)'''
+##    hip = sqrt(c1**2+c2**2)
+##    return hip
+##
+
+##def design_square(x):
+##    '''Return a square design with lado x'''
+##    t.forward(x)
+##    t.left(90)
+##    t.forward(x)
+##    t.left(90)
+##    t.forward(x)
+##    t.left(90)
+##    t.forward(x)
+##def design_cicle(y):
+##    '''Return a circle design with radius y'''
+##    t.circle(y)
+##def desenha_figura(x,ang,times):
+##    '''Desenha uma figura de lado x, angulo ang e times vezes'''
+##    for c in range(times):
+##        design_square(x)
+##        t.left(ang)
+##        design_cicle(x)
+## 
+
+def saudacao(nome, saudacao='Olá'):
+    '''
+    Função que exive uma saudação personalizada.
+    '''
+
+    mensagem = f'{saudacao},{nome}!'
+    return mensagem
+def area_retangulo(base,altura=1):
+    '''
+    Calcula a area de um retangulo
+    '''
+    return base*altura
+
+def desenha_retangulo(a,b,cor_borda='blue',cor_fundo='purple'):
+    '''Desenha um retangulo de lados a e b da borda azul e fundo amarelo por padrão'''
+    t.clear()
+    t.color(cor_borda) #cor da caneta
+    t.fillcolor(cor_fundo) #cor do preenchimento
+    t.begin_fill() #inicia preenchimento
+    t.forward(a)
+    t.left(90)
+    t.forward(b)
+    t.left(90)
+    t.forward(a)
+    t.left(90)
+    t.forward(b)
+    t.end_fill() #fim do preenchimento
+
+def desenha_circulo(x,y,r=10,cor_borda='blue',cor_fundo='black'):
+    '''Desenha um circulo de raio R nas coord x,y'''
+    t.clear()
+    t.speed('fastest')
+    t.up()
+    t.goto(x,y)
+    t.color(cor_borda)
+    t.fillcolor(cor_fundo)
+    t.begin_fill()
+    t.circle(r)
+    t.end_fill()
+    
+
