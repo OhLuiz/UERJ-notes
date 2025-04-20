@@ -1,0 +1,216 @@
+##listas e tuplas
+# tupla = ()//imutavel
+# lista = []//mutavel
+# para ter uma tupla unitária, é necessário colocar o valor antecedido a uma virgula
+# zip(tupla1,tupla2) faz quase um dicionário com a combinação de cada elemento respectivo de uma tupla
+# podemos usar a tupla como se fossem strings, usando [] ṕara operá-las
+## --------------------- QUESTÃO 1 -----------------------------
+def mudanca_salarial():
+    ##DONE, só falta documentar
+    salario = float(input("Digite o valor do salário do funcionário: "))
+    if salario <= 3500:
+        return print((salario + 0.09 * salario) + 200)
+    else:
+        return print((salario + 0.09 * salario))
+
+
+## --------------------- QUESTÃO 2 -----------------------------
+def calculo_agua():
+    ##DONE, só falta documentar
+    metrosc = int(input("Digite o valor em m³: "))
+    if metrosc <= 10:
+        return print("R$7")
+    elif metrosc <= 30:
+        return print(f"O valor é de {7 + 1 * (metrosc - 10)}R$")
+    elif metrosc <= 100:
+        return print(f"O valor é de {27 + 2 * (metrosc - 30)}R$")
+    else:
+        return print(f"O valor é de {167 + 5 * (metrosc - 100)}R$")
+
+
+## --------------------- QUESTÃO 3 -----------------------------
+def calculo_IR():
+    salario = float(input("Digite o valor do salário do funcionário: "))
+    if salario <= 2259.20:
+        print(f"Isento")
+    elif salario <= 2826.65:
+        print(f"Isento")  ##ENTENDER IMPOSTO DE RENDA
+
+
+## --------------------- QUESTÃO 4 -----------------------------
+from random import randint
+
+def jogo_de_dados():
+    ##COLOCAR UM DELAY
+    print("QUE COMECE O JOGO!!, VAMOS VER QUANTAS VEZES SÃO NECESSÁRIAS PARA DOIS DADOS DAREM O MESMO NÚMERO!")
+    n1, n2, i = 0, 1, 0
+    while n1 != n2:
+        n1 = randint(0, 6)
+        print(f'O primeiro dado deu {n1}')
+        n2 = randint(0, 6)
+        print(f'O segundo dado deu {n2}')
+        i += 1
+        print('=-'*30)
+
+    print(f'Boa! Finalmente acabou, foram necessárias {i} tentativas')
+
+
+## --------------------- QUESTÃO 5 -----------------------------
+import turtle as t
+
+
+def estrela(lado, cor='dark blue'):
+    t.color(cor)
+    i = 1
+    while i <= 5:
+        t.forward(lado)
+        t.right(216)
+        i += 1
+
+def desenha_ceu(cor = 'dark blue'):
+    i = 0
+    t.hideturtle()
+    t.speed('fastest')
+    t.bgcolor('black')
+    while i < 100:
+        t.up()
+        t.goto(randint(-100, 100), randint(-100, 100))
+        t.down()
+        t.begin_fill()
+        estrela(randint(0, 20))
+        t.end_fill()
+        i += 1
+        ##Reescrever para a estrela ser feita por fora e não por dentro
+
+## --------------------- QUESTÃO 6 -----------------------------
+##DONE, só falta documentar
+def quadrado(x):
+    i = 1
+    while i <= 4:
+        t.forward(x)
+        t.left(90)
+        i += 1
+
+def tabuleiro(x, cor='red'):
+    pos_zero_x, pos_zero_y = -4*x, 4*x
+    t.speed('fastest')
+    t.bgcolor('black')
+    t.color(cor)
+    t.hideturtle()
+    i = 0
+    t.up()
+    t.goto(pos_zero_x,pos_zero_y) ##centralizar o tabuleiro
+    t.down()
+    while i < 8:
+        j = 0
+        while j < 8:
+            if (i+j) % 2 != 1:
+                ##Preencher o quadrado
+                t.up()
+                t.goto((i * x) + pos_zero_x, (-j * x) + pos_zero_y)
+                t.down()
+                t.begin_fill()
+                quadrado(x)
+                t.end_fill()
+            else:
+                ##Não preencher o quadrado
+                t.up()
+                t.goto((i * x) + pos_zero_x, (-j * x) + pos_zero_y)
+                t.down()
+                quadrado(x)
+            j += 1
+        i += 1
+
+## --------------------- QUESTÃO 7 -----------------------------
+def numero_perfeito(n):
+    ##DONE, só falta documentar
+    i,soma = 1,0
+    while i<n:
+        if n%i == 0:
+            soma += i
+        i+=1
+    if soma == n:
+        print('O número é perfeito')
+    else:
+        print('O número não é perfeito')
+
+## --------------------- QUESTÃO 8 -----------------------------
+##Done, só fazer a verificação do 1
+def primo(n):
+    i,ct = 2,0 ##O número 1 não é primo, por isso o contador começa em 2
+    while i<=n:
+        if n%i == 0:
+            ct+=1
+        i+=1
+    if ct>1:
+        return False
+    else:
+        return True
+
+def soma_primo(n):
+    i,soma = 2, 0
+    while i<n:
+        if primo(i):
+            soma += i
+        i+=1
+    return print(soma)
+
+## --------------------- QUESTÃO 9 -----------------------------
+#Done, só deixar mais organizado
+def juros_compostos(p,r,n):
+    i,a = 1,0
+    juros = (1+(r/100))
+    print('Ano  Saldo na conta')
+    while i<=n:
+        p = p*juros
+        print(f"{i}  {p:.2f}")
+        i+=1
+## --------------------- QUESTÃO 10-----------------------------
+
+def juros_compostos_V2(p,
+                       objetivo,
+                       anos,
+                       meses,
+                       r = 0.5,
+                       month = True):
+    i = 1
+    if month:
+        ##Caso mes for True, a taxa é mensal
+        juros = (1 + (r / 100))
+        meses = meses + anos*12
+        print('Mes  Saldo na conta')
+        while i<=meses:
+            p = p * juros
+            print(f"{i}  {p:.2f}")
+            i += 1
+        if p < objetivo:
+            print('Com o tempo investido, não foi possível chegar no valor objetivo,'
+                  'a seguir seguirá uma tabela demonstando quanto tempo mais serria necessário para '
+                  'alcançá-lo')
+            while p < objetivo:
+                print('Mes  Saldo na conta')
+                p = p * juros
+                print(f"{i}  {p:.2f}")
+        else:
+            print('O obejtivo foi alcançado')
+    else:
+        ##Caso mes for false, a taxa é anual
+        juros = (1 + (r / 100))
+        anos = anos + meses/12
+        print('Ano  Saldo na conta')
+        while i <= anos:
+            p = p * juros
+            print(f"{i}  {p:.2f}")
+            i += 1
+        if p < objetivo:
+            print('Com o tempo investido, não foi possível chegar no valor objetivo,'
+                  'a seguir seguirá uma tabela demonstando quanto tempo mais serria necessário para '
+                  'alcançá-lo')
+            while p < objetivo:
+                print('Ano  Saldo na conta')
+                p = p * juros
+                print(f"{i}  {p:.2f}")
+        else:
+            print('O obejtivo foi alcançado')
+
+juros_compostos_V2(1000,1500, 10,5,11.28,False)
