@@ -34,8 +34,17 @@ def calculo_IR():
     if salario <= 2259.20:
         print(f"Isento")
     elif salario <= 2826.65:
-        print(f"Isento")  ##ENTENDER IMPOSTO DE RENDA
-
+        print(f"A pagar {0.075*169.44:.2f}"
+              f"Aliquota de 7,5%")
+    elif salario <= 3751.05:
+        print(f"A pagar {0.15*381.44:.2f}"
+              f"Aliquota de 15%")
+    elif salario <= 4664.68:
+        print(f"A pagar {0.225*662.77:.2f}"
+              f"Aliquota de 22,5%")
+    else:
+        print(f"A pagar {0.275*896:.2f}"
+              f"Aliquota de 27,5%")
 
 ## --------------------- QUESTÃO 4 -----------------------------
 from random import randint
@@ -166,7 +175,7 @@ def juros_compostos(p,r,n):
         print(f"{i}  {p:.2f}")
         i+=1
 ## --------------------- QUESTÃO 10-----------------------------
-
+##Perguntar sobre essa questão
 def juros_compostos_V2(p,
                        objetivo,
                        anos,
