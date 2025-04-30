@@ -53,16 +53,16 @@ def calculo_IR(salario, desconto_simplificado=False):
         if desconto_simplificado:  # Se o salário estiver na faixa de 2250,20 - 2826,65 com o desconto simplificado, o IR será 0
             print(f"Isento")
         else:  # Se o salário estiver na faixa de 2250,20 - 2826,65 sem o desconto simplificado, o IR será de 7,5% da aliquota de R$169,44
-            print(f"A pagar {0.075 * 169.44:.2f}"
+            print(f"A pagar R${0.075 * 169.44:.2f}. "
             f"Aliquota de 7,5%")
     elif salario <= 3751.05:  # Se o salário estiver na faixa de 2826,65 - 3751,05, o IR será de 15% da aliquota de R$381,44
-        print(f"A pagar {0.15 * 381.44:.2f}"
+        print(f"A pagar R${0.15 * 381.44:.2f}. "
               f"Aliquota de 15%")
     elif salario <= 4664.68:  # Se o salário estiver na faixa de 3751,05 - 4664.68, o IR será de 22,5% da aliquota de R$662,77
-        print(f"A pagar {0.225 * 662.77:.2f}"
+        print(f"A pagar R${0.225 * 662.77:.2f}. "
               f"Aliquota de 22,5%")
     else:  # Se o salário for maior que 4664.68, o IR será de 27,5% da aliquota de R$896
-        print(f"A pagar {0.275 * 896:.2f}"
+        print(f"A pagar R${0.275 * 896:.2f}. "
               f"Aliquota de 27,5%")
 
 
@@ -80,6 +80,7 @@ def jogo_de_dados():
     '''
     print("QUE COMECE O JOGO!!, VAMOS VER QUANTAS VEZES SÃO NECESSÁRIAS PARA DOIS DADOS DAREM O MESMO NÚMERO!")
     n1, n2, i = 0, 1, 0  # Definindo as constantes a serem usadas, n1 é o dado 1, n2 é o dado 2 e i é o contador
+
     while n1 != n2:  # Para que o jogo comece, n1 e n2 têm que ser diferentes, por isso eles foram declarados com valores distintos
         n1 = randint(1, 6)  # n1 recebe um valor aleatório entre 1 e 6
         print(f'O primeiro dado deu {n1}')
@@ -88,8 +89,7 @@ def jogo_de_dados():
         i += 1  # atualiza o contador para a próxima rodada
         print('=-' * 30)
 
-    print(
-        f'Boa! Finalmente acabou, foram necessárias {i} tentativas')  # imprime na tela quantas vezes foram necessárias para o jogo acabar
+    print(f'Boa! Finalmente acabou, foram necessárias {i} tentativas')  # imprime na tela quantas vezes foram necessárias para o jogo acabar
 
 
 ## --------------------- QUESTÃO 5 -----------------------------
@@ -107,11 +107,11 @@ def estrela(lado, cor='dark blue'):
         Função sem retorno, apenas desenhos.
     '''
     t.color(cor)  # Definindo a cor do pincel a ser usada
-    i = 0  # configurando o contador
-    while i < 5:
-        t.forward(lado)  # Segue reto
-        t.right(216)  # Vira-se para XXXX a YYYY graus
-        i += 1  # Atualiza o contador
+    i = 0  # Configurando o contador
+    while i < 5: # Começa o desenho
+        t.forward(lado)
+        t.right(216)
+        i += 1
 
 
 def desenha_ceu(cor='dark blue'):
@@ -125,17 +125,17 @@ def desenha_ceu(cor='dark blue'):
         Função sem retorno, apenas desenhos.
     '''
     i = 0  # Configurando o contador
-    t.hideturtle()  # Esconde-se o pincel para diminuir a poluição visual
-    t.speed('fastest')  # Define que a pintura do pincel será rápida
-    t.bgcolor('black')  # define que a cor do plano de fundo será preta
-    while i < 100:  # começamos uma contagem até 100, ou seja, serão feitas 100 estrelas aleatórias na tela
-        t.up()  # levantamos o pincel para que não suje a tela
-        t.goto(randint(-500, 500), randint(-500, 500))  # vamos até uma posição aleatória na tela
-        t.down()  # abaixamos o pincel para começar a pintura
-        t.begin_fill()  # definimos que a pintura será preenchida pela cor da borda
+    t.hideturtle()  # Define-se as opções de pintura
+    t.speed('fastest')
+    t.bgcolor('black')
+    while i < 100:  # Começando a pintar de no painel de forma randomica
+        t.up()
+        t.goto(randint(-500, 500), randint(-500, 500))  # vai até uma posição randomica
+        t.down()
+        t.begin_fill()
         estrela(randint(10, 30), cor)  # Chamamos a função estrela para criar uma estrela de tamanho randomico entre
-        # 10 e 50 e que tenha a cor escolhida pelo usuário
-        t.end_fill()  # Terminanmos de preencher tudo que for desenhado a partir daqui
+                                        # 10 e 50 e que tenha a cor escolhida pelo usuário
+        t.end_fill()
         i += 1  # atualiza o contador
 
 
@@ -150,9 +150,9 @@ def quadrado(x):
         Função sem retorno, apenas desenhos.
     '''
     i = 1  # configuro o contador
-    while i <= 4:  # começo uma repetição de 4 contagens em que cada contagem fara um lado do quadrado.
-        t.forward(x)  # sigo reta
-        t.left(90)  # viro em 90 graus
+    while i <= 4:  # Começa o desenho
+        t.forward(x)
+        t.left(90)
         i += 1  # atualizo o contador
 
 
@@ -160,21 +160,22 @@ def tabuleiro(x, cor='red'):
     ''''
          Função com dois parâmetros de entrada:
          (int, str) → None
-         x = int(valor do lado do quadrado)
-         cor = str(cor da borda do quadrado e por consequência a cor do tabuleiro)/por padrão é red
-         Desenha um tabuleiro de xadrez a partir da obtenção do lado x do quadrado usado como base
+         x = int(valor do tamanho do tabuleiro, sendo que o tamanho do quadrado será x/8)
+         cor = str(cor do quadrado e por consequência a cor do tabuleiro)/por padrão é red
+         Desenha um tabuleiro de xadrez a partir da obtenção do lado x usado como base
          Função sem retorno, apenas desenhos.
     '''
+    t.clear()
     pos_zero_x, pos_zero_y = -4 * x, 4 * x  # Definimos duas variáreis que decidirão a posição 0 do pincel, usada para
     # centralização do tabuleiro na tela
-    t.speed('fastest')  # Define que a pintura do pincel será rápida
-    t.bgcolor('black')  # Define que a cor do plano de fundo será preta
-    t.color(cor)  # Definindo a cor do pincel a ser usada
-    t.hideturtle()  # Esconde-se o pincel para diminuir a poluição visual
+    t.speed('fastest')  #  Define-se as opções de pintura
+    t.bgcolor('black')
+    t.color(cor)
+    t.hideturtle()
     i = 0  # Configurando o contador do eixo X
-    t.up()  # levantamos o pincel para que não suje a tela
+    t.up()
     t.goto(pos_zero_x, pos_zero_y)  ##centralizar o tabuleiro
-    t.down()  # abaixamos o pincel para começar a pintura
+    t.down()
     while i < 8:  # começamos a contagem para o eixo X
         j = 0  # configurando o contador do eixo Y
         while j < 8:  # começamos a contagem do eixo Y
@@ -210,13 +211,12 @@ def numero_perfeito(n):
     '''
     i, soma = 1, 0  # configurando o contador e definindo uma variável de soma, atribuindo um valor inicial de 0
     while i < n:  # começando a contagem
-        if n % i == 0:  # se o valor de i, que é menor que n por obrigação, for um multiplo inteiro de n, a variável soma
-            # recebe um acréscimo de i, sendo o valor da variável mais o valor de i.
+        if n % i == 0:  #verificação se i é multiplo de n
             soma += i
         i += 1  # atualiza o contador
-    if soma == n:  # verificação final, se a variável soma no final se igualar ao número digitado, ele é um número perfeito
+    if soma == n:  # verificação final, se soma == n, o número é perfeito
         print('O número é perfeito')
-    else:  # verificação final, se a variável soma no final não se igualar ao número digitado, ele não é um número perfeito
+    else:  # verificação final, se soma != n, o número não é perfeito
         print('O número não é perfeito')
 
 
@@ -230,13 +230,13 @@ def primo(n):
     Um número primo é aquele que só possui dois divisores, o número um e ele próprio
     '''
     i, ct = 2, 0  ##O número 1 não é primo, por isso o contador começa em 2
-    while i <= n:
+    while i <= n: #Começa a contagem
         if n % i == 0:
             ct += 1
         i += 1
     if ct > 1:
         return False
-    else:  # caso o contador de multiplos de for igual a um, quer dizer que ele não é primo
+    else:  # caso o contador de multiplos for igual a um, quer dizer que ele é primo
         return True
 
 
@@ -278,60 +278,77 @@ def juros_compostos(p, r, n):
 
 
 ## --------------------- QUESTÃO 10-----------------------------
-##Perguntar sobre essa questão
 def juros_compostos_V2(p,
                        objetivo,
                        r,
                        aporte,
                        month=True):
-    i, capital = 1, p
+    ''' Função com um parâmetro de entrada:
+         (float, float, float, float, bool) → None
+         p = float(capital incial)
+         objetivo = float(qual valor a pessoa que está investindo pretende chegar)
+         r = float(taxa mensal de juros)
+         aporte = float(aporte mensal de investimento)
+         month = bool(vai ser mensal ou não)
+         Retorna uma tabela mostrando a quantidade de tempo e o retorno em cada ano de uma taxa r aplicada em juros compostos
+         E compara com a tabela do mesmo valor aplicada na poupança, taxa de 0.5% ao mês
+         E dado o valor objetivo, a tabela é feita até que o valor investido chegue ao objetivo
+         Função sem retornos, apenas prints
+         '''
+
+    i, capital = 0, p #Configuro o cotnador e crio uma cópia do capital inicial que será usado na tabela de poupança
+    juros = (1 + (r / 100)) #guardo o valor de juros da taxa aplicada em uma função
+    juros_poupanca = (1 + (0.5 / 100)) #guardo o valor de juros da taxa de poupança em uma função
+    print('Mes  Saldo na conta')
+    print(f'{0}  R${p:.2f}')
     if month:
-        ##Caso mes for True, a taxa é mensal
-        juros = (1 + (r / 100))
-        juros_poupanca = (1 + (0.5 / 100))
-        print('Mes  Saldo na conta')
-        print(f'{0}  {p:.2f}')
-        while p <= objetivo:
-            p = (p * juros) + aporte
-            print(f"{i}  {p:.2f}")
+        ##Caso month for True, a taxa é mensal
+        while p <= objetivo: #Começo criando a primeira tabela, com a taxa de juros inserida
             i += 1
-        print(
-            f'Com o capital inicial de R${capital:.2f}, a uma taxa de juros de {r}% ao mês e um aporte mensal de R${aporte}, foi necessário {i} meses para alcançar o objetivo')
+            p = (p * juros) + aporte
+            print(f"{i}  R${p:.2f}")
+        print(f'Com o capital inicial de R${capital:.2f}, a uma taxa de juros de {r}% ao mês e um aporte mensal de R${aporte}, foi necessário {i} meses para alcançar o objetivo')
+        ##--------------------POUPANÇA--------------------
         print('Se o mesmo investimento fosse feito na poupança seria a seguinte tabela: ')
         print('Mes  Saldo na conta')
-        print(f'{0}  {p:.2f}')
-        i = 1
-        p = capital
-        while p <= objetivo:
-            p = (p * juros_poupanca) + aporte
-            print(f"{i}  {p:.2f}")
+        p = capital #redefino a variável para criar a nova tabela
+        i = 0 #zero o contador
+        print(f'{0}  R${p:.2f}')
+        while p <= objetivo: #crio a tabela de juros da poupança, para fazer o comparativo com a de cima
             i += 1
-        print(
-            f'Com o capital inicial de R${capital:.2f}, a uma taxa de juros de 0,5% ao mês e um aporte mensal de R${aporte}, foi necessário {i} meses para alcançar o objetivo')
+            p = (p * juros_poupanca) + aporte
+            print(f"{i}  R${p:.2f}")
+        print(f'Com o capital inicial de R${capital:.2f}, a uma taxa de juros de 0,5% ao mês e um aporte mensal de R${aporte}, foi necessário {i} meses para alcançar o objetivo')
 
     else:
-        ##Caso mes for false, a taxa é anual
-        juros = (1 + (r / 100))
-        juros_poupanca = (1 + (12 * 0.5 / 100))
-        print('Ano  Saldo na conta')
-        print(f'{0}  {p:.2f}')
-        while p <= objetivo:
-            p = (p * juros) + aporte
-            print(f"{i}  {p:.2f}")
+        ##Caso month for false, a taxa é anual
+        while p <= objetivo: #Como o aporte e a taxa são mensais e o usuário pediu que seja anual, farei como se fosse mensal e respondo a cada 12 meses(1 ano)
             i += 1
-        print(
-            f'Com o capital inicial de R${capital:.2f}, a uma taxa de juros de {r}% ao ano e um aporte anual de R${aporte}, foi necessário {i} anos para alcançar o objetivo')
+            p = (p * juros) + aporte
+            if i%12 == 0:
+                print(f"{i/12:.0f}  R${p:.2f}")
+        while i%12 != 0: #caso o objetivo seja alcançado em anos com casas decimais, termino a aplicação até que o valor de ano seja inteiro
+            i+=1
+            p = (p * juros) + aporte
+        print(f"{i / 12:.0f}  R${p:.2f}")
+
+        print(f'Com o capital inicial de R${capital:.2f}, a uma taxa de juros de {((juros**12) - 1)*100:.2f}% ao ano e um aporte anual de R${aporte:.2f}, foi necessário {i/12:.0f} anos para alcançar o objetivo')
+        ##--------------------POUPANÇA--------------------
         print('Se o mesmo investimento fosse feito na poupança seria a seguinte tabela: ')
         print('Ano  Saldo na conta')
-        print(f'{0}  {p:.2f}')
-        i = 1
-        p = capital
-        while p <= objetivo:
-            p = (p * juros_poupanca) + aporte
-            print(f"{i}  {p:.2f}")
+        p = capital  # redefino a variável para criar a nova tabela
+        i = 0  # zero o contador
+        print(f'{0}  R${p:.2f}')
+        while p <= objetivo: #crio a tabela de juros da poupança, para fazer o comparativo com a de cima
             i += 1
-        print(
-            f'Com o capital inicial de R${capital:.2f}, a uma taxa de juros de 6% ao ano e um aporte anual de R${aporte},foi necessário {i} anos para alcançar o objetivo')
+            p = (p * juros_poupanca) + aporte
+            if i%12 == 0:
+                print(f"{i/12:.0f}  R${p:.2f}")
+        while i%12 != 0:
+            i+=1
+            p = (p * juros_poupanca) + aporte
+        print(f"{i / 12:.0f}  R${p:.2f}")
+        print(f'Com o capital inicial de R${capital:.2f}, a uma taxa de juros de 6% ao ano e um aporte anual de R${aporte:.2f},foi necessário {i/12:.0f} anos para alcançar o objetivo')
 
 
 def teste():
@@ -353,8 +370,10 @@ def teste():
         metrosc = int(input("Digite a quantidade de m^3 de água usados: "))
         calculo_agua(metrosc)
     elif ch == 3:
+        desconto = 'N'
         salario = float(input("Digite o valor do salário do funcionário: "))
-        desconto = input("Tem desconto simplificado?(S ou N) ").upper()
+        if salario > 2529.21 and salario <= 2824:
+            desconto = input("Tem desconto simplificado?(S ou N) ").upper()
         if desconto == 'S':
             calculo_IR(salario, True)
         else:
@@ -382,17 +401,16 @@ def teste():
     elif ch == 10:
         capital = float(input("Digite o valor do capital inicial: "))
         objetivo = float(input("Digite o valor do objetivo final: "))
+        r = float(input("Digite o valor da taxa mensal(em %): "))
+        aporte = float(input("Digite o valor do aporte mensal: "))
         meses = input("O investimento será mensal?(S ou N) ").upper()
         if meses == 'S':
-            r = float(input("Digite o valor da taxa mensal(em %): "))
-            aporte = float(input("Digite o valor do aporte mensal: "))
             juros_compostos_V2(capital, objetivo, r, aporte, True)
         else:
-            r = float(input("Digite o valor da taxa anual(em %): "))
-            aporte = float(input("Digite o valor do aporte anual: "))
             juros_compostos_V2(capital, objetivo, r, aporte, False)
-
 
 while True:
     teste()
     print("-=" * 30)
+
+
