@@ -1,0 +1,185 @@
+#include <stdlib.h>
+#include <stdio.h>
+
+#define SIZE 1000 /* Max of size of matrices */
+int A[SIZE][SIZE], B[SIZE][SIZE], C[SIZE][SIZE];
+
+int main(int argc, char * argv[]){
+    int i, j, k, N;
+    N = atoi(argv[1]);
+    fill_matrix(A, N);
+    fill_matrix(B, N);
+    for (i = 0; i < N; i++)
+    {
+        for (j = 0; j < N; j++)
+        {
+            C[i][j] = 0.0;
+            for (k = 0; k < N; k++)
+            {
+                C[i][j] = C[i][j] + A[i][j] + B[i][j];
+            }
+            
+        }
+        
+    }
+    
+}
+
+void fill_matrix(int matriz[N][N], N){
+    int i, j, cont = 1;
+    for (i = 0; i < 2; i++)
+    {
+        for (j = 0; j < 2; j++)
+        {
+            matriz[i][j] = cont++;
+        }
+        
+    }
+}
+
+
+
+import random as r
+def func1(n:float) -> bool:
+    n = float(n)
+    if str(n)[-1] == '0':
+        return True
+    else:
+        return False
+
+def func2(n1:int,n2:int,n3:int) -> int:
+    num1 = 0
+    num2 = 0
+    num3 = 0
+    if n1 >= n2 and n1 >= n3:
+        num1 = n1
+        if n2 >= n3:
+            num2 = n2
+            num3 = n3
+        else:
+            num2 = n3
+            num3 = n2
+    elif n2 >= n1 and n2 >= n3:
+        num1 = n2 
+        if n3 >= n1:
+            num2 = n3
+            num3 = n1
+        else:
+            num2 = n1
+            num3 = n3
+
+    else:
+        num1 = n3            
+        if n1 >= n2:
+            num2 = n1
+            num3 = n2
+        else:
+            num2 = n2
+            num3 = n1
+        
+    return num1, num2, num3
+
+def func3(palavra:str) -> str:
+    nova_palavra = ""
+    verif = True
+    if palavra[0] == palavra[0].lower():
+        verif = True
+    else:
+        verif = False
+    for i in range(len(palavra)):
+        if verif == True:
+            nova_palavra += palavra[i].lower()
+            verif = False
+        else:
+            nova_palavra +=palavra[i].upper()
+            verif = True
+    return nova_palavra
+
+def func4(palavra1:str,palavra2:str) -> str:
+    cont1 = 0
+    cont2 = 0
+    char1 = ""
+    char2 = ""
+
+    for char in palavra1:
+        if char not in char1:
+            char1 += char
+            cont1 += 1
+
+    for char in palavra2:
+        
+        if char not in char2:
+            char2 += char
+            cont2 +=1
+    if cont1 >= cont2:
+        return palavra1
+    else:
+        return palavra2 
+
+def func5(palavra):
+    nova_palavra = ""
+    nsorteados = ""
+
+    while True:
+        n = r.randint(0,len(palavra)-1)
+        if str(n) not in nsorteados:
+            nsorteados += str(n)
+            nova_palavra += palavra[n]
+            if len(nova_palavra) == len(palavra):
+                break
+    return nova_palavra
+
+
+def func6(numero:int) -> bool:
+    base = 0 
+    for i in range(2,numero//2):
+        potencia = i
+        while potencia <= numero:
+            if potencia == numero:
+                base = i
+
+            potencia *= i
+    cont = 0
+    for i in range (1,base):
+        if base % i == 0:
+            cont += 1
+    if cont == 1:
+        return True
+    else:
+        return False
+
+    ##string = input('Inserir string: ')
+##
+##newstring = ' '
+##newstring += string[0].upper()
+##
+##    
+##for i in range(1, len(string)):
+##    if string[i] == ' ':
+##        newstring += string[i+1].upper()
+##        i += 1
+##    elif string[i-1] != ' ':
+##        newstring += string[i]
+##    #return newstring
+##print(newstring)
+                
+
+def somaString(x: str, y: str) -> str:
+    a = int(x)
+    b = int(y)
+
+    if type(a) != int or type(b) != int:
+        return 'Erro'
+    else:
+        soma = a + b
+        return str(soma)
+
+def main():
+    print(somaString('1','2'))
+    print(somaString('a','b'))
+
+main()
+
+    
+    
+    
