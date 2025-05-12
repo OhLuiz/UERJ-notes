@@ -1,0 +1,140 @@
+import matplotlib.pyplot as pot
+
+
+def selection_sortV2(L,n):
+    '''Ordena uma lista de n elementos usando o algoritmo de inserção
+       L - lista
+       n - número de elementos'''
+    for i in range(n):
+        pos_min = i
+        #vai encontrar a posição mínima
+        for j in range(1+i,n):
+            if L[j] < L[pos_min]:
+                pos_min = j
+        #trocar i por pos_min
+                aux = L[i]
+                L[i] = L[j]
+                L[j] = aux
+    return L
+
+def selection_sort(L):
+    i = len(L)
+    for m in range(i):
+        for n in range(m,i-1):
+            if L[n] < L[m]:
+                aux = L[m]
+                L[m] = L[n]
+                L[n] = aux
+
+
+def insertion_sort(L,n):
+    '''Ordena uma lista de n elementos unsando o algoritmo de inserção'''
+    for i in range(1,n):
+        atual = L[i]
+        j = i-1
+        while j>=0 and atual < L[j]:
+            L[j+1] = L[j]
+            j = j - 1
+        L[j+1] = atual
+
+def bubble_sort(L, n):
+    '''Ordena uma lista de n elementos usando o algorítmo de bolha'''
+    for i in range(n-1,1,-1):
+        troca = 0
+        for j in range(i):
+            if L[j] > L[j+1]:
+                #troca
+                temp = L[j+1]
+                L[j+1] = L[j]
+                L[j] = temp
+                troca += 1
+        if troca == 0:
+            break
+
+import random
+import time
+
+def cria_lista(n):
+    '''Retorna uma lista de n n´meros aleatórias'''
+    return random.sample(range(5*n),n)
+        
+def lista_do_milhao():
+    tempo = time.time()
+    for ct in range(4):
+        L = []
+        if ct == 0:
+            L = criar_lista_al(1000)
+            insertion_sort(L,len(L))
+            tempo2 = time.time() - tempo
+            print(f'Tempo necessário {tempo2}')
+        elif ct == 1:
+            L = criar_lista_al(1000*10)
+            insertion_sort(L,len(L))
+            tempo2 = time.time() - tempo
+            print(f'Tempo necessário {tempo2}')
+        elif ct == 2:
+            L = criar_lista_al(1000*100)
+            insertion_sort(L,len(L))
+            tempo2 = time.time() - tempo
+            print(f'Tempo necessário {tempo2}')
+        elif ct == 3:
+            L = criar_lista_al(1000*1000)
+            insertion_sort(L,len(L))
+            tempo2 = time.time() - tempo
+            print(f'Tempo necessário {tempo2}')
+
+def teste():
+    '''Simula e mede o tempo de execução de algoritmos de ordenação'''
+    T = (100,1000,2000,5000,10000,20000)
+    tempos = {'selection': [], 'insertion': [], 'bubble': []}
+    for n in T:
+        L = cria_lista(n)
+        L2 = L.copy()
+        L3 = L.copy()
+
+        #selection sort
+        inicio = time.time()
+        selection_sort(L)
+        fim = time.time()
+        print(f'Para {n} o tempo do alg. de seleção: {fim - inicio}')
+        tempos['selection'].append(fim - inicio)
+
+        #insertion sort
+        inicio = time.time()
+        insertion_sort(L2,n)
+        fim = time.time()
+        print(f'Para {n} o tempo do alg. de insertion: {fim - inicio}')
+        tempos['insertion'].append(fim - inicio)
+    
+        #bubble sort
+        inicio = time.time()
+        bubble_sort(L3,n)
+        fim = time.time()
+        print(f'Para {n} o tempo do alg. de bubble: {fim - inicio}')
+        tempos['bubble'].append(fim - inicio)
+
+        #graficamos os resultados
+    pot.plot(T,tempos['selection'],'g',label = 'selection')
+    pot.plot(T,tempos['insertion'],'b',label = 'insertion')
+    pot.plot(T,tempos['bubble'],'r',label = 'bubble')
+    pot.xlabel('x')
+    pot.ylabel('Tempo')
+    pot.show()
+
+##estudar métodos de ordenação insertion ganha
+
+
+##Conjuntos
+##Não possuem indexação, são usadas chaves, organiza os dados em ordem e tira duplicatas(os elemtos são imutaveis
+##Usados quando a ordem é irrelevante
+##Não podemos criar um conjunto com dados mutáveis dentro
+##Ver todos os comandos relacionados
+
+
+#Dicionário
+#Coleção de elementos Chave - Valor
+#Dicionário = {chave1:valor1, chave2:valor2, ...}
+#Json é muito similar a um dict em python
+
+    
+    
