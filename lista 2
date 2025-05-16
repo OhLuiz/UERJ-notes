@@ -1,4 +1,5 @@
 ## --------------------- QUESTÃO 1 -----------------------------
+##APROVADO
 def calculadora(t,operacao):
     operacao = operacao.upper()
     if operacao == 'SOMA':
@@ -17,23 +18,30 @@ def calculadora(t,operacao):
         print("A operação informada não foi reconhecida")
 
 ## --------------------- QUESTÃO 2 -----------------------------
+
 def numero_valido(numero):
-    ddd = ()
-    numero2 = ()
+    ddd = ''
+    numero2 = ''
+    ddd2 = []
+    numero_sem_ddd = []
+    numero = str(numero)
     for c in range(len(numero)):
         if len(numero) == 8 or len(numero) == 9:
-            numero2 += (c,)
+            numero2 += numero[c]
         elif len(numero) == 10 or len(numero) == 11:
             if c<2:
-                ddd += (c,)
+                ddd += numero[c]
             else:
-                numero2+=(c,)
+                numero2+= numero[c]
+    ddd2.append(ddd)
+    numero_sem_ddd.append(numero2)
     if len(numero2) > 0 and len(ddd) == 0:
         print('O número digitado não possui DDD, porém é um número válido')
-        return numero2
+        print(tuple(numero_sem_ddd))
     elif len(numero2) > 0 and len(ddd) > 0:
         print('O número digitado possui DDD e é um número válido')
-        return ddd,numero2
+        print(tuple(ddd2),end = '')
+        print(tuple(numero_sem_ddd))
     else:
         print('O número é inválido')
 
@@ -41,23 +49,26 @@ def numero_valido(numero):
 ## --------------------- QUESTÃO 3 -----------------------------
 def situacao_aluno(t):
     soma=0
-    situacao = ()
-    final = ()
+    situacao = []
+    final = []
     for c in t:
-        if type(c) == str():
-            situacao += (c,)##colocar na posição 1
+        if type(c) !=  str:
+            soma+=c
+        else:
+            situacao.insert(0,c)##colocar na posição 1
+            
     media = soma/(len(t)-1)
-    situacao += (media,)
+    situacao.append(float(f"{media:.2f}"))
     if media >= 7:
-        final = ('aprovado','parabéns!')
+        final = ['aprovado','parabéns!']
         situacao += final
     elif media >= 5 and media < 7:
-        final = ('aprovado')
+        final = ['aprovado']
         situacao += final
     else:
-        final = ('reprovado')
+        final = ['reprovado']
         situacao += final
-    return situacao
+    return tuple(situacao)
 
 ## --------------------- QUESTÃO 4 -----------------------------
 def minimo(t):
@@ -172,9 +183,79 @@ def multiplicacao_matrizes(A,B):
         for m in range(len(A[0])):
             for n in range(len(B)):
                 soma+=A[m][n]*B[n][m]
-            linha.append(soma)
-            soma = 0
-        ## m,n = 0,0 2x1; m,n = 0,1 2x2 next
-        ## m,n = 1,0 
+                linha.append(soma)
+                sona = 0
+            matriz.append(linha)
+    return matriz
 
 ##--------------------------------QUESTÃO 8 ---------------------
+def menor_IPCA(lista_ipca):
+    menor_ipca = 15
+    menor_chave = ''
+    for c in lista_ipca.keys():
+        for n in c.keys():
+            if lista_ipca[c][n] < menor_ipca:
+                if n == 'Brasil':
+                    pass
+                else:
+                    menor_ipca = lista_ipca[c][n]
+                    menor_chave = n
+    return menor_ipca, menor_chave
+
+def maior_IPCA(lista_ipca):
+    maior_ipca = 0
+    maior_chave = ''
+    for c in lista_ipca.keys():
+        for n in c.keys():
+            if lista_ipca[c][n] > maior_ipca:
+                if n == 'Brasil':
+                    pass
+                else:
+                    maior_ipca = lista_ipca[c][n]
+                    maior_chave = n
+    return maior_ipca, maior_chave
+
+def menor_IPCA_media(lista_ipca):
+    n, media = 0, 1000
+    menor_media = 0
+    menor_categoria = ''
+    
+    for c in lista_ipca.keys():
+        media = 0
+        n = 0
+        for n in c.keys():
+            if n == 'Brasil':
+                pass
+            else:
+                media += lista_ipca[c][n]
+                n+=1
+        media = media/n
+        if menor_media > media:
+            menor_media = media
+            menor_categoria = c
+
+    return menor_media, menor_categoria
+
+def maior_IPCA_media(lista_ipca):
+    n, media = 0, 0
+    maior_media = 0
+    maior_categoria = ''
+    
+    for c in lista_ipca.keys():
+        media = 0
+        n = 0
+        for n in c.keys():
+            if n == 'Brasil':
+                pass
+            else:
+                media += lista_ipca[c][n]
+                n+=1
+        media = media/n
+        if maior_media > media:
+            maior_media = media
+            maior_categoria = c
+
+    return maior_media, maior_categoria
+
+
+                
