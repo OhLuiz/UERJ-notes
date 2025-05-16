@@ -1,0 +1,180 @@
+## --------------------- QUESTÃO 1 -----------------------------
+def calculadora(t,operacao):
+    operacao = operacao.upper()
+    if operacao == 'SOMA':
+        return t[0] + t[1]
+    elif operacao == 'MULT':
+        return t[0]*t[1]
+    elif operacao == 'DIV':
+        return t[0]//t[1]
+    elif operacao == 'SUB':
+        return t[0]-t[1]
+    elif operacao == 'MOD':
+        return t[0]%t[1]
+    elif operacao == 'POT':
+        return t[0]**t[1]
+    else:
+        print("A operação informada não foi reconhecida")
+
+## --------------------- QUESTÃO 2 -----------------------------
+def numero_valido(numero):
+    ddd = ()
+    numero2 = ()
+    for c in range(len(numero)):
+        if len(numero) == 8 or len(numero) == 9:
+            numero2 += (c,)
+        elif len(numero) == 10 or len(numero) == 11:
+            if c<2:
+                ddd += (c,)
+            else:
+                numero2+=(c,)
+    if len(numero2) > 0 and len(ddd) == 0:
+        print('O número digitado não possui DDD, porém é um número válido')
+        return numero2
+    elif len(numero2) > 0 and len(ddd) > 0:
+        print('O número digitado possui DDD e é um número válido')
+        return ddd,numero2
+    else:
+        print('O número é inválido')
+
+
+## --------------------- QUESTÃO 3 -----------------------------
+def situacao_aluno(t):
+    soma=0
+    situacao = ()
+    final = ()
+    for c in t:
+        if type(c) == str():
+            situacao += (c,)##colocar na posição 1
+    media = soma/(len(t)-1)
+    situacao += (media,)
+    if media >= 7:
+        final = ('aprovado','parabéns!')
+        situacao += final
+    elif media >= 5 and media < 7:
+        final = ('aprovado')
+        situacao += final
+    else:
+        final = ('reprovado')
+        situacao += final
+    return situacao
+
+## --------------------- QUESTÃO 4 -----------------------------
+def minimo(t):
+    tmin = t[0]
+    for c in t:
+        if t[c] < tmin:
+            tmin = t[c]
+    return tmin
+
+def maximo(t):
+    tmax = t[-1]
+    for c in t:
+        if t[c]>tmax:
+            tmax = t[c]
+    return tmax
+
+def colisao(t1,t2): #quem sabe diminuir esse código
+    t1min = minimo(t1)
+    t1max = maximo(t1)
+    t2min = minimo(t2)
+    t2max = maximo(t2)
+    ##casos que tem colisão: se o t1min for maior que o t2min e menor que o t2max
+    ## ou se o t1max for maior que t1min do outro e menor que t2max
+    ##basicamente estou analisando se o minimo ou o maximo de um está contido em outro.
+    if t1min <= t2max and t1min >= t2min:
+        return True
+    elif t1min <= t1max and t2min >= t1min:
+        return True
+    elif t1max >= t2min and t1max <= t2max:
+        return True
+    elif t2max >= t1min and t2max <= t1max:
+        return True
+    else:
+        return False
+
+## --------------------- QUESTÃO 5 -----------------------------
+def ordem_crescente(c):
+    for m in range(len(c),0,-1):
+        j,troca = 0,0
+        while j<m-1:
+            if c[j] > c[m]:
+                aux = c[j]
+                c[j] = c[m]
+                c[m] = aux
+                troca+=1
+            j+=1
+        if troca == 0:
+            return c
+def maiores_que(n,lista):
+    lista_maiores = []
+    for c in lista:
+        if c>n:
+            lista_maiores.append(n)
+    ordem_crescente(lista_maiores)
+
+##--------------------------------QUESTÃO 6 ---------------------
+def sequencia_biologica(dna):
+    tamanho = len(dna)
+    leucinas, posGG, posRR = 0,[],[]
+    nDNA = ''
+    for m in range(0,len(dna),2):
+        if dna[m:m+2] == 'GG':
+            posGG.append(m)
+        if dna[m:m+2] == 'RR':
+            posRR.append(m)
+        if dna[m:m+2] == 'LL':
+            leucinas+=1
+        if dna[m:m+5] == 'SSSR':
+            for c in range(m,m+5):
+                dna.pop(c)
+            dna.insert(m,'AAAA')
+    ##usar comandos de lista como count ou find para fazer essas questões
+    for c in range(100):
+        nDNA += dna[c]
+    print(f"A quantidade de Leucinas é de: {leucinas}"
+          f"As posições em que há duas glicinas(GG): {posGG}"
+          f"As posições em que há duas argininas(RR): {posRR}")
+    print("-="*30)
+    print(f'Os 100 primeiros aminoácidos da sequência: {nDNA}')
+    print(f"A cadeia de aminoácidos escrita com a troca de 3 serinas e 1 arginina(SSSR) por alaninas (AAAA): {dna}")
+
+##--------------------------------QUESTÃO 7 ---------------------
+from random import randint
+def cria_matriz(l,c):
+    linha = []
+    matriz = []
+    for m in range(c):
+        for n in range(l):
+            linha.append(randint(-100,100))
+        matriz.append(linha)
+        linha = []
+    return matriz
+
+def soma_matriz(A,B):
+    linha = []
+    matriz = []
+    if len(A) == len(B) and len(A[0]) == len(B[0]):
+        for m in range(len(A)):
+            for n in range(len(A[0])):
+                linha.append(A[m][n]+B[m[n]])
+            matriz.append(linha)
+            linha = []
+
+def multiplicar_matriz_escalar(A,k):
+    return k*A
+
+def multiplicacao_matrizes(A,B):
+    linha = []
+    matriz = []
+    soma = 0
+    if len(A[0]) == len(B):
+        for m in range(len(A[0])):
+            for n in range(len(B)):
+                soma+=A[m][n]*B[n][m]
+            linha.append(soma)
+            soma = 0
+        ## m,n = 0,0 2x1; m,n = 0,1 2x2 next
+        ## m,n = 1,0 
+
+##--------------------------------QUESTÃO 8 ---------------------
