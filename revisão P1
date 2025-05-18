@@ -1,0 +1,204 @@
+##---------------------------REVISÃO----------------------------------
+##Faça uma função insere(lista,n) que dada uma lista ordenada(crescente) de números e um numero n,
+##inclua n na posição corretA, ou seja, de tal maneira que a lista continue ordenada.
+from random import randint
+from time import time
+def cria_lista(n):
+    lista = []
+    for c in range(n):
+        lista.append(randint(0,100))
+    return lista
+def ordena_lista(lista):
+    if type(lista) != list:
+        lista = list(lista)
+    aux,passo = 0,0
+    for c in range(len(lista)-1,0,-1):
+        j = 0
+        while j < c:
+            if lista[j] > lista[c]:
+                aux = lista[j]
+                lista[j] = lista[c]
+                lista[c] = aux
+            j+=1 
+        passo = 0
+    return lista
+
+def maior_que(lista,n):
+    lista2= []
+    for c in lista:
+        if c>n:
+            lista2.append(c)
+    return lista2
+
+def insere(lista,n): #não necessariamente percorre a lista toda[
+    tempoinicial = time()
+    i = 0
+    while i<len(lista) and lista[i] < n:
+        i+=1
+    lista.insert(i,n)
+    tempofinal = time()
+    return lista, tempofinal-tempoinicial
+
+def insere_V2(lista,n): ##percore a lista 2x
+    tempoinicial = time()
+    maiores = maior_que(lista,n)
+    menores = []
+    
+    for c in lista:
+        if c not in maiores:
+            menores.append(c)
+            
+    lista = menores
+    lista.append(n)
+    lista += maiores
+    tempofinal = time()
+    
+    return lista, tempofinal-tempoinicial
+
+def insere_V3(lista,n): #percorre a lista diversas vezes
+    tempoinicial = time()
+    lista.append(n)
+    ordena_lista(lista)
+    tempofinal = time()
+    return lista, tempofinal-tempoinicial
+
+##Faça uma função que dada uma frase. retorne o número de palavras da frase. Considere que a frase pode ter espaços
+##no inicio e no final e que as palavras são separadas por um único espaço
+
+def conta_palavras(frase):
+    frase = frase.strip()
+    return frase.count(" ")+1
+
+
+def conta_palavras_V2(frase):
+    ct,fr = 0, ''
+    palavra = []
+    while frase[ct] == " ":
+        ct+=1
+    ct2 = len(frase) - 1
+    while frase[ct2] == " ":
+        ct2-=1
+    espacos = 0
+    for c in range(ct,ct2):
+        if frase[c] == " ":
+            espacos+=1
+
+    return espacos + 1
+            
+    
+def conta_palavras_V3(frase):
+    i = 0
+    while frase[i] == " ":
+        i+=1
+    j = len(frase)-1
+    while frase[j] == ' ':
+        j-=1
+
+    espacos = 0
+    for k in range(i, j-1):
+        if frase[k]== ' ':
+            espacos += 1
+            
+    return espacos + 1
+
+##Dado um texto armazenado em uma string, faça uma função que conte o número de frases que aparecerem nesse texto.
+##Cada frase no texto é terminada com ponto final, um ponto de exclamação, um ponto de interrogação ou três pontos
+##em sequência Pontos de exclamação ou de interrogação não aparecerão repetidos em sequência no texto e esses
+##simbolos só aparecem no texto terminando uma frase. No exemplo a seguir, são contadas 4 frases:
+## "Preciso tirar um cochilho. Meu Deus! Que horas são?Vou perder a minha aula..
+
+def conta_frase(frase):
+    ct,count, pos_zero, frases = 0,0,500,0
+    while ct < len(frase):
+        if frase[ct]== '.':
+            count+=1
+            pos_zero = ct
+        elif frase[ct] == '?':
+            frases+=1
+        elif frase[ct] == '!':
+            frases+=1
+        if ct - pos_zero > 3 and count ==1:
+            frases+=1
+            count = 0
+        elif ct - pos_zero == 0 and count == 3:
+            frases+=1
+            count = 0
+        ct+=1 
+    return frases
+
+
+
+##Crie uma função que simule o lançamento de um dado n = 1000 vezes e retorna um dicionário contendo a face
+##do lado e a frequência obtida nos lançamentos
+
+def dict_dado():
+    face_dados = {"Face 1":[],"Face 2":[],"Face 3":[],"Face 4":[],"Face 5":[],"Face 6":[]}
+    freq1,freq2,freq3,freq4,freq5,freq6 = 0,0,0,0,0,0
+    numero = 0
+    for c in range(1000):
+        numero = randint(1,6)
+        if numero == 1:
+            freq1+=1
+        elif numero == 2:
+            freq2+=1
+        elif numero == 3:
+            freq3+=1
+        elif numero == 4:
+            freq4+=1
+        elif numero == 5:
+            freq5+=1
+        elif numero == 6:
+            freq6+=1
+    face_dados['Face 1'] = f'{freq1/1000}%'
+    face_dados['Face 2'] = f'{freq2/1000}%'
+    face_dados['Face 3'] = f'{freq3/1000}%'
+    face_dados['Face 4'] = f'{freq4/1000}%'
+    face_dados['Face 5'] = f'{freq5/1000}%'
+    face_dados['Face 6'] = f'{freq6/1000}%'
+    return face_dados
+
+
+##desenha tabuleiro
+
+import turtle as t
+def quadrado(x):
+    i = 1
+    while i<=4:
+        t.forward(x)
+        t.right(90)
+        i+=1
+def tabuleiro(x, cor = 'red'):
+    posx_zero,posy_zero = -4*x, 4*x
+    t.hideturtle()
+    t.speed("fastest")
+    t.bgcolor("black")
+    t.color(cor)
+    for m in range(8):
+        for n in range(8):
+            if (m+n)%2 != 1:
+                t.up()
+                t.goto(m*x+posx_zero,posy_zero-n*x)
+                t.down()
+                t.begin_fill()
+                quadrado(x)
+                t.end_fill()
+            else:
+                t.up()
+                t.goto(m*x+posx_zero,posy_zero-n*x)
+                t.down()
+                quadrado(x)
+
+
+#fibonacci
+def fibonnaci(n):
+    i = 0
+    a = 0
+    b = 1
+    while i<n:
+        print(a)
+        c = a
+        a = b
+        b = a+c
+        i+=1
+# 0 1 1 2
+## 0 1 1
