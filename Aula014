@@ -62,35 +62,36 @@ class Elevador:
         print(f"N° de pessoas: {self.pessoas}"
               f"\nAndar atual: {self.andarat}")
 class Moto:
-    def __init__(self,marca,modelo,cor,marcha,menormarcha,maiormarcha,ligada = False):
+    def __init__(self,marca,modelo,cor,menormarcha,maiormarcha,ligada = False):
         self.marca = marca
         self.modelo = modelo
-        self.marcha = marcha
+        self.marcha = 0
         self.maiormarcha = maiormarcha
         self.menormarcha = menormarcha
         self.ligada = ligada
-    def macha_acima(self):
+    def marcha_acima(self):
         if self.marcha < self.maiormarcha:
             self.marcha+=1
         else:
             print("Marcha máxima alcançada")
-    def macha_abaixo(self):
+    def marcha_abaixo(self):
         if self.marcha > self.menormarcha:
             self.marcha-=1
         else:
             print("Marcha mínima alcançada")
-    def ligar():
+    def ligar(self):
         if self.ligada == True:
-            continue
+            pass
         else:
             self.ligada = True
-    def desligar():
+    def desligar(self):
         if self.ligada == False:
-            continue
+            pass
         else:
             self.ligada = False
-    def imprime():
-        print("Marcha atual: {self.marcha}")
+    def imprime(self):
+        print(f"Marcha atual: {self.marcha}"
+              f"\nSituação atual: {self.ligada}")
 
     
 def main():
@@ -107,6 +108,13 @@ def main():
     elevador.imprime()
 
 def main2():
-    moto = Moto()##Coisas aqui
-    ##Fazer
+    moto = Moto('Honda','M45',"Azul",0,5)
+    moto.marcha_acima()
+    for c in range(3):
+        moto.marcha_acima()
+    moto.marcha_abaixo()
+    moto.ligar()
+    moto.desligar()
+    moto.ligar()
+    moto.imprime()
     
