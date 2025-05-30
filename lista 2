@@ -110,41 +110,40 @@ def colisao(t1,t2): #quem sabe diminuir esse código
     return False
 
 ## --------------------- QUESTÃO 5 -----------------------------
+#QUASE APROVADO
 def ordem_crescente(c):
-    for m in range(len(c),0,-1):
-        j,troca = 0,0
-        while j<m-1:
-            if c[j] > c[m]:
-                aux = c[j]
-                c[j] = c[m]
-                c[m] = aux
-                troca+=1
-            j+=1
-        if troca == 0:
-            return c
+    for m in range(len(c)):
+        for n in range(m,len(c)):
+            if c[m] > c[n]:
+                aux = c[m]
+                c[m] = c[n]
+                c[n] = aux
+    return c
 def maiores_que(n,lista):
+    lista = ordem_crescente(lista)
     lista_maiores = []
     for c in lista:
         if c>n:
-            lista_maiores.append(n)
-    ordem_crescente(lista_maiores)
+            lista_maiores.append(c)
+    return lista_maiores
 
 ##--------------------------------QUESTÃO 6 ---------------------
+##VERIFICAR
 def sequencia_biologica(dna):
     tamanho = len(dna)
     leucinas, posGG, posRR = 0,[],[]
     nDNA = ''
-    for m in range(0,len(dna),2):
+    for m in range(0,len(dna),2): #AQUI
         if dna[m:m+2] == 'GG':
             posGG.append(m)
         if dna[m:m+2] == 'RR':
             posRR.append(m)
         if dna[m:m+2] == 'LL':
             leucinas+=1
-        if dna[m:m+5] == 'SSSR':
-            for c in range(m,m+5):
-                dna.pop(c)
-            dna.insert(m,'AAAA')
+        if dna[m:m+4] == 'SSSR':
+            for c in range(m,m+4):
+                dna ##AQUI 
+                dna[c] = 'a'
     ##usar comandos de lista como count ou find para fazer essas questões
     for c in range(100):
         nDNA += dna[c]
@@ -173,12 +172,17 @@ def soma_matriz(A,B):
     if len(A) == len(B) and len(A[0]) == len(B[0]):
         for m in range(len(A)):
             for n in range(len(A[0])):
-                linha.append(A[m][n]+B[m[n]])
+                linha.append(A[m][n]+B[m][n])
             matriz.append(linha)
             linha = []
+    return matriz
 
-def multiplicar_matriz_escalar(A,k):
-    return k*A
+def multiplicar_matriz_escalar(B,k):
+    A = B[:]
+    for m in range(len(A)):
+        for n in range(len(A[0])):
+            A[m][n] = k*A[m][n]
+    return A
 
 def multiplicacao_matrizes(A,B):
     linha = []
