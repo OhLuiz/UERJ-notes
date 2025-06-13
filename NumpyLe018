@@ -1,0 +1,32 @@
+import numpy as np
+##array lista de  numeros, podendo ser 1D, 2D ou 3D
+
+vetor_linha = np.array([1,2,3])
+
+#Criar vetor coluna
+vetor_coluna = np.array([[1],[2],[3]]) #ele consegue printar de tal forma que fique como coluna ou linha
+
+
+#imprimir
+print(vetor_linha)
+print(vetor_coluna)
+
+matriz = np.array([[1,2],[3,4],[5,6]])
+print(matriz)
+print(matriz.shape) ##retorna qual é o tamanho da lista em forma de tupla: (linha,coluna)
+
+##vetor_linha[0] retorna a lista que está na posição 0 da lista
+##matriz[1,0] retorna o número que está na posição de linha 1 e coluna 0
+vetor = np.array([1,2,3,4,5,6,7,8,9])
+#vetor[::-1] retorna a matriz ao contrário
+#vetor[3:7] fatiamento do jeito que conheço
+#vetor.shape retorna o tamanho em forma de tupla
+#vetor.size a quantidade de termos que existe nela
+#vetor.ndim numero de colunas
+
+matriz = np.array([[1,2,3,4],
+                   [5,6,7,8],
+                   [9,10,11,12]])
+
+caracteristicas = matriz[:,:3] #vai pegar todas as linhas e até a coluna 3
+classes = matriz[:,3] #vai pegar todas as linhas e só a coluna 3
