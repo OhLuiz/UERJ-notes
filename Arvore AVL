@@ -1,0 +1,131 @@
+class Node():
+    def __init__(self, valor):
+        self.valor = valor
+        self.esq = None
+        self.dir = None
+        self.altura = 1
+
+def ABB():
+    def __init__(self):
+        self.raiz = None
+        self.quantidade = 0
+        self.alturaMax = 0
+
+    def alturaArvore(self):
+        return self.alturaMax
+    
+    def empty(self):
+        return self.quantidade == 0
+
+    def busca(self,valor):
+        return self.__busca(self.raiz,valor)
+    
+    def __busca(self,atual,valor):
+        if atual is not None:
+            if valor == atual.valor:
+                return atual
+            elif valor < atual.valor:
+                return self.__busca(atual.esq,valor)
+            else:
+                return self.__busca(atual.dir,valor)
+        else:
+            return None
+        
+    def altura(self,no):
+        """Retorna a altura do nó"""
+        if no is not None:
+            return no.altura
+        else:
+            return 0
+    
+    def fb(self,no):
+        """Retorna o fator de balanceamento do nó"""
+        if no is not None:
+            return self.altura(no.esq) - self.altura(no.dir)
+        else:
+            return 0
+
+    def __insert(self,atual,valor):
+        if atual is None:
+            return Node(valor)
+        if valor<atual.dado:
+            self.__insert(atual.esq, valor)
+        elif valor > atual.dado:
+            self.__insert(atual.dir, valor)
+        else:
+            return atual
+        
+        #atualizamos a altura
+        atual.altura = 1 + max(self.altura(atual.esq),self.altura(atual.dir))
+
+        ##calcular o fator de balanceamento do nó
+        fb = self.fb(atual)
+
+        ##Casos de rotação(Atividade)
+        if fb > 2 and self.gbb(atual.esq) >= 0:
+            atual = RSD(atual)
+        if fb < -2 and self.fb(atual.dir) <= 0:
+            atual = RSE(atual)
+        if fb > 2 and self.fb(atual.esq) < 0:
+            atual = RDD(atual)
+        if fb < -2 and self.fb(atual.dir) > 0:  
+            atual = RSE(atual)
+
+        return atual
+        
+
+    def insert(self, valor):
+        self.__insert(self.raiz, valor)
+
+    def RSE(self, B):
+        """Rotação simples à esquerda(RSE)"""
+        if B is not None:
+            D = B.dir
+            C = D.esq
+
+            ##Fazemos a rotação
+            D.esq = B
+            B.dir = C
+
+            ##Atualizamos as alturas    
+
+            B.altura = 1 + max(self.altura(B.esq), self.altura(B.dir))
+            D.altura = 1 + max(self.altura(D.esq), self.altura(D.dir))
+
+            ##Retornamos a nova raiz
+            return D
+        
+    def RSD(self, D):
+        """Rotação simples à direita(RSD)"""
+        if D is not None:
+            B = D.esq
+            C = B.dir
+
+            ##Fazemos a rotação
+            B.dir = D
+            D.esq = C
+
+            ##Atualizamos as alturas
+            D.altura = 1 + max(self.altura(D.esq), self.altura(D.dir))
+            B.altura = 1 + max(self.altura(B.esq), self.altura(B.dir))
+
+            ##Retornamos a nova raiz
+            return B
+    
+    def RDE(self, C):
+        """Rotação dupla à esquerda(RDE: RSD -> RSE)"""
+        if C is not None:
+            C.dir = self.RSD(C.dir)
+
+            return self.RSE(C)
+        
+    def RDD(self, C):
+        """Rotação dupla à direita(RDD: RSE -> RSD)"""
+        if C is not None:
+            C.esq = self.RSE(C.esq)
+
+            return self.RSD(C)
+        
+    ##REFAZER O MÉTODO DE INSERÇÃO PENSANDO NISSO(ACRESCENTANDO ROTAÇÕES)
+
+
