@@ -53,6 +53,11 @@ class ArvoreB:
     def insercao(self,valor):
         ##precisamos inserir em ordem
 
+        #implementar a busca, preciso da classe lista encadeada ordenada
+        #ponto bônus por ISSO
+        #PONTO NA PROVA, INSERÇÃO E PRINTAR
+
+
         ##verificar a complexidade
 
         pass
