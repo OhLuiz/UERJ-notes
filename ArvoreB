@@ -1,0 +1,69 @@
+#temos chaves que chegam a um máximo igual à ordem menos 1 (m-1)
+#temos a quantidade filhos igual a ordem (m)
+#colocamos em ordem alfabetica, se ao adicionar uma nova letra, vê-se onde ela fica em ordem alfabetica
+#se passar a quantidade máxima de chaves(m-1), dividimos em duas páginas e a letra central vira o
+#ver os slides
+#cada página tem que ter um número minimo de (m-1)/2 elementos
+
+class No:
+    def __init__(self,m):
+        """Define um nó de ordem m"""
+        self.m = m #ordem
+        self.chaves = [] #lista ordenada de chaves, posso pegar a implementação de lista sequencial ordenada
+        self.filhos = [] #lista de referencias aos filhos, poderia usar uma lista sequencial de tamanho definido
+        self.ehfolha = True #indica se o nó é uma folha
+       
+
+class ArvoreB:
+    def __init__(self,ordem):
+        self.raiz = No(ordem)
+        self.m = ordem
+        self.altura = 0
+    def adicionar(self,valor):
+        if self.altura == 0: #estamos adicionando na raiz
+            if len(self.raiz.chaves)+1 > self.m -1:
+                pass
+                #temos que criar nó filho da raiz, para isso é necessário ter noção de ordem
+            else:
+                self.raiz.chaves.append(valor) #verificar quanto à ordenagem   
+    
+    def busca(self,valor):
+        return self.__busca(valor,self.raiz)
+    
+    def __busca(self,valor,no):
+        """Busva um vlaor na arvore a partir de um nó"""
+        if no is None:
+            return self.raiz
+        
+        #procuramos pelo valor
+        i = 0
+        while i < len(no.chaves) and  no.chaves[i] < valor:    
+            i+=1
+        #verificamos se o valor está presente no nó atual
+        if i<len(no.chaves) and no.chaves[i] == valor:
+            return no, i
+        #vou ter que procurar de forma recursiva o valor nos filhos
+        elif no.folha: # se o nó for folha, não existe
+            return None
+        else:
+            return self.busca(valor, no.filhos[i])
+        
+        #verifica a complexidade, mas acredito que seja O(m)
+
+    def insercao(self,valor):
+        ##precisamos inserir em ordem
+
+        ##verificar a complexidade
+
+        pass
+    
+            
+
+
+#para remoção substituimos o valor escolhido pelo seu sucessor       
+#se o elemento a remover estiver em uma folha, basta simplesmente removê-lo
+#se após a remoção, o número de chaves restantes acaba sendo (m-1)/2, temos que concatenar páginas irmãs
+#caso ainda satisfaça a condição 
+##remoção com redistribuição, a redistribuição é para que as páginas estejam com a quantidade de chaves equilibradas
+### precisamos analisar quais estão com "excesso" e quais estão com "mínimo" e ajustar de tal forma que fique igual 
+# como fazer um script que vai entender isso tudo? tem muitos passos a serem seguidos e um problema a resolver###
