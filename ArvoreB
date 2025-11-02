@@ -6,62 +6,169 @@
 #cada página tem que ter um número minimo de (m-1)/2 elementos
 
 class No:
-    def __init__(self,m):
-        """Define um nó de ordem m"""
-        self.m = m #ordem
-        self.chaves = [] #lista ordenada de chaves, posso pegar a implementação de lista sequencial ordenada
-        self.filhos = [] #lista de referencias aos filhos, poderia usar uma lista sequencial de tamanho definido
-        self.ehfolha = True #indica se o nó é uma folha
-       
+    def __init__(self, m):
+        """Define um nó de ordem m (ordem = max de filhos)"""
+        self.m = m # Ordem
+        self.chaves = [] # Lista ordenada de chaves
+        self.filhos = [] # Lista de referencias aos filhos
+        self.ehfolha = True # Indica se o nó é uma folha
+    
+    def is_full(self):
+        """Verifica se o nó está cheio (atingiu o max de chaves)"""
+        # O número máximo de chaves é m-1
+        return len(self.chaves) == self.m - 1
 
 class ArvoreB:
-    def __init__(self,ordem):
-        self.raiz = No(ordem)
+    def __init__(self, ordem):
+        """
+        Inicializa a Árvore B.
+        
+        Parâmetros:
+            ordem (int): A ordem (m) da árvore. Deve ser 3 ou mais.
+        """
+        if ordem < 3:
+            raise ValueError("A ordem da árvore B deve ser pelo menos 3.")
         self.m = ordem
-        self.altura = 0
-    def adicionar(self,valor):
-        if self.altura == 0: #estamos adicionando na raiz
-            if len(self.raiz.chaves)+1 > self.m -1:
-                pass
-                #temos que criar nó filho da raiz, para isso é necessário ter noção de ordem
-            else:
-                self.raiz.chaves.append(valor) #verificar quanto à ordenagem   
-    
-    def busca(self,valor):
-        return self.__busca(valor,self.raiz)
-    
-    def __busca(self,valor,no):
-        """Busva um vlaor na arvore a partir de um nó"""
-        if no is None:
-            return self.raiz
+        self.raiz = No(ordem)
+
+
+    def insercao(self, valor):
+        """
+        Método público para inserir um valor na Árvore B.
+        """
+        raiz_antiga = self.raiz
         
-        #procuramos pelo valor
-        i = 0
-        while i < len(no.chaves) and  no.chaves[i] < valor:    
-            i+=1
-        #verificamos se o valor está presente no nó atual
-        if i<len(no.chaves) and no.chaves[i] == valor:
-            return no, i
-        #vou ter que procurar de forma recursiva o valor nos filhos
-        elif no.folha: # se o nó for folha, não existe
-            return None
+        # A Raiz está cheia.
+        if raiz_antiga.is_full():
+            # A raiz precisa ser dividida. Isso faz a árvore crescer em altura.
+            
+            # 1. Criar uma nova raiz
+            nova_raiz = No(self.m)
+            nova_raiz.ehfolha = False 
+            self.raiz = nova_raiz
+            
+            # A raiz antiga vira o primeiro filho da nova raiz
+            nova_raiz.filhos.append(raiz_antiga)
+            
+            # Dividir a raiz antiga (que agora é o filho[0] da nova_raiz)
+            self.__split(nova_raiz, 0)
+            
+            self.__inserir_recursivo(nova_raiz, valor)
         else:
-            return self.busca(valor, no.filhos[i])
+            # A Raiz não está cheia.
+            self.__inserir_recursivo(raiz_antiga, valor)
+
+
+    def __split(self, no_pai, indice_filho_cheio):
+        """
+        Método privado para dividir um nó cheio.
+        """
         
-        #verifica a complexidade, mas acredito que seja O(m)
+        filho_cheio = no_pai.filhos[indice_filho_cheio]
+        
+        # Criar um novo nó (irmão) que receberá a metade direita
+        novo_irmao = No(self.m)
+        novo_irmao.ehfolha = filho_cheio.ehfolha
+        
+        # Encontrar o índice da chave mediana (no nó cheio)
+        mediana = (self.m - 1) // 2
+        
+        # Pegar a chave mediana para "promover" ao pai
+        meio = filho_cheio.chaves[mediana]
+        
+        # Mover a "metade direita" das chaves do filho_cheio para o novo_irmao
+        novo_irmao.chaves = filho_cheio.chaves[mediana + 1:]
+        
+        # Se o nó não for folha, mover os filhos (da metade direita)
+        if not filho_cheio.ehfolha:
+            novo_irmao.filhos = filho_cheio.filhos[mediana + 1:]
 
-    def insercao(self,valor):
-        ##precisamos inserir em ordem
+        filho_cheio.chaves = filho_cheio.chaves[:mediana]
+        if not filho_cheio.ehfolha:
+            filho_cheio.filhos = filho_cheio.filhos[:mediana + 1]
+            
+        no_pai.chaves.insert(indice_filho_cheio, meio)
+        
+        no_pai.filhos.insert(indice_filho_cheio + 1, novo_irmao)
 
-        #implementar a busca, preciso da classe lista encadeada ordenada
-        #ponto bônus por ISSO
-        #PONTO NA PROVA, INSERÇÃO E PRINTAR
+        
+    def __inserir_recursivo(self, atual, valor):
+        """
+        Função auxiliar recursiva que insere o valor.
+        """
+        
+        if atual.ehfolha:
+            # Como o nó não está cheio, apenas inserimos em ordem.
+            # Encontrar a posição correta
+            i = 0
+            while i < len(atual.chaves) and valor > atual.chaves[i]:
+                i += 1
+            atual.chaves.insert(i, valor)
+            
+        else:
+            i = 0
+            while i < len(atual.chaves) and valor > atual.chaves[i]:
+                i += 1
+            
+            if atual.filhos[i].is_full():
+                # Se estiver cheio, dividimos ele antes de descer
+                self.__split(atual, i)
+                
+                # Após o split, 'atual' (pai) tem uma nova chave.
+                # Precisamos re-verificar para qual filho descer.
 
+                if valor > atual.chaves[i]:
+                    i += 1 # O valor agora pertence ao novo irmão
+            
+            self.__inserir_recursivo(atual.filhos[i], valor)
+            
+    def mostrar_arvore(self):
+        """
+        Imprime todas as chaves da árvore em ordem.
+        """
+        print("Valores na Árvore (em ordem):")
+        self.__percorrer_em_ordem(self.raiz)
+        print("\n--- Fim ---")
+        
+    def __percorrer_em_ordem(self, no):
+        """Função recursiva que visita os nós em ordem."""
+        if no:
+            if no.ehfolha:
+                # Caso Base (Folha): Apenas imprime as chaves
+                for chave in no.chaves:
+                    print(chave, end=" ")
+            else:
+                # Caso Recursivo (Interno):
+                # Visita o primeiro filho (filhos[0])
+                self.__percorrer_em_ordem(no.filhos[0])
+                
+                # Alterna entre imprimir chave e visitar o próximo filho
+                for i in range(len(no.chaves)):
+                    print(no.chaves[i], end=" ") # Imprime a chave
+                    self.__percorrer_em_ordem(no.filhos[i+1]) # Visita o filho à direita da chave
+        
+# -----------------------------------------------------------------
+# SCRIPT DE TESTE
+# -----------------------------------------------------------------
+print("=== Iniciando Teste da Árvore B (Ordem 3) ===")
 
-        ##verificar a complexidade
+# Ordem 3: Máximo de 2 chaves por nó.
+arvore = ArvoreB(3)
 
-        pass
+# Lista de valores que forçarão splits
+valores_para_inserir = [10, 20, 5, 15, 25, 30, 1, 7, 35]
+
+for valor in valores_para_inserir:
+    print(f"\n--- Inserindo valor: {valor} ---")
+    arvore.insercao(valor)
     
+    # Mostrar a árvore após cada inserção
+    arvore.mostrar_arvore()
+
+print("\n\n=== Teste Finalizado ===")
+print("Estrutura final da árvore:")
+arvore.mostrar_arvore()
+
             
 
 
