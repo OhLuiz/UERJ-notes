@@ -1,0 +1,92 @@
+class listaSequencialOrdenada:
+    def __init__(self,maxsize):
+        self.elementos = [None] * maxsize
+        self.maxsize = maxsize
+        self.tamaho = 0
+
+    def empty(self):
+        return self.tamaho == 0
+
+    def full(self):
+        return self.tamaho == self.maxsize
+
+    def inserir(self, valor):
+        if self.full():
+            print("Lista Cheia!")
+            return -1
+
+        pos = 0
+        while pos < self.tamaho and self.elementos[pos] < valor:
+            pos += 1
+        
+        for j in range(self.tamaho, pos, -1):
+            self.elementos[j] = self.elementos[j - 1]
+        self.elementos[pos] = valor
+        self.tamaho += 1
+
+    def buscar(self, valor):
+        if self.empty():
+            print("Lista Vazia!")
+            return -1
+        else:
+            inicio = 0
+            fim = self.tamaho - 1
+            while inicio <= fim:
+                meio = (inicio + fim) // 2
+                if self.elementos[meio] == valor:
+                    return meio
+                elif self.elementos[meio] < valor:
+                    inicio = meio + 1
+                else:
+                    fim = meio - 1
+            return -1  # Valor não encontrado
+
+    def remover(self, valor):
+        indice = self.buscar(valor)
+        if indice == -1:
+            print("Valor não encontrado na lista.")
+        else:
+            for i in range(indice, self.tamaho - 1):
+                self.elementos[i] = self.elementos[i + 1]
+            self.elementos[self.tamaho - 1] = None
+            self.tamaho -= 1
+
+    def exibir(self):
+        return self.elementos[:self.tamaho]
+    
+class Node():
+    def __init__(self,ordem):
+        self.chaves = listaSequencialOrdenada(ordem - 1)
+        self.filhos = listaSequencialOrdenada(ordem)
+
+class ArvoreB:
+    def __init__(self, ordem):
+        #Todo nó, exceto a raiz deve ter no minimo minimo de ⌈m/2⌉ - 1 chaves
+        #todo nó deve ter no maximo m - 1 chaves
+        if ordem <3:
+            raise ValueError("A ordem da árvore B deve ser pelo menos 3.")
+        else:
+            self.raiz = Node(ordem)
+            self.ordem = ordem
+
+    def inserir(self, valor):
+        return self.__inserir(valor,self.raiz)
+
+    def __inserir(self, valor, atual):
+        #preciso verificar se o nó atual é uma folha, caso contrário, preciso descer
+        if atual.filhos.empty():
+            atual.chaves.inserir(valor)
+
+        else:
+            for i in range(atual.chaves.tamaho):
+                if valor < atual.chaves.elementos[i]:
+                    filho = atual.filhos.elementos[i]
+                    self.__inserir(valor,filho)
+                    return
+            self.__inserir(valor,atual.filhos.elementos[i+1])
+            
+    def exibir(self):
+        pass
+
+    def buscar(self, valor):
+        pass
