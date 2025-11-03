@@ -1,0 +1,80 @@
+class HashAberto:
+    def __init__(self,tamanho):
+        self.tamanho = tamanho
+        self.n = 0
+        self.hash = {}
+        if type(tamanho) == int:
+            for n in range(tamanho):
+                self.hash[n] = [None,False]
+        elif type(tamaho) == str:
+            if len(tamanho) > 1:
+                raise Exception("A chave deve conter somente um caractere!")
+            elif len(tamanho) == 1:
+                alfabeto = "abcdefghijklmnopqrstuvwxyz"
+                
+
+    def __str__(self):
+        lista = ""
+        for n in self.hash.keys():
+            if self.hash[n][0] is not None:
+                lista += f"Chave: {n} -> Valor: {self.hash[n]}\n"
+        return lista
+
+    def full(self):
+        return self.n == self.tamanho
+
+    def empty(self):
+        return self.n == 0
+
+    def __f(self,valor):
+        return valor%self.tamanho
+        
+    def adicionar(self,valor):
+        self.__adicionar(valor,self.__f(valor))
+
+    def __adicionar(self,valor,i):
+        if self.full():
+            print("Hash cheio!")
+            return
+        if i < 13:
+            if self.hash[i][0] is not None and self.hash[i][0] != valor:
+                self.__adicionar(valor,i+1)
+            elif self.hash[i][0] is None:
+                self.hash[i][0] = valor
+                self.n+=1
+            elif self.hash[i][0] == valor:
+                print("Valor já existente no Hash")
+                return
+        else:
+            i = 0
+            self.__adicionar(valor,i+1)
+    ### preciso fazer a função de remoção antes da função de busca
+    ### para facilitar adicionamos um segundo elemento em casa hash
+    ### Esse segundo elemento diz se foi removido
+
+    def remocao(self,valor):
+        i = self.__f(valor)
+        self.hash[i][0] = None
+        self.hash[i][1] = True
+
+    def busca(self,valor):
+        i = self.__f(valor)
+        self.__busca(valor,i,0)
+
+    def __busca(self,valor,i,ct):
+        if i < 13:
+            if self.hash[i][0] is not None or self.hash[i][1]:
+                if valor == self.hash[i][0]:
+                    return i
+                else:
+                    self.__busca(valor,i+1,ct)
+                    
+            elif not self.hash[i][1]:
+                return -1
+        else:
+            i = 0
+            self.__busca(valor,i+1,ct)
+
+    
+            
+        
