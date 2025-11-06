@@ -1,0 +1,114 @@
+class No:
+    def __init__(self,valor):
+        self.valor = valor
+        self.prox = None
+
+class ListaEncadeada:
+    def __init__(self):
+        self.head = None
+        self.n = 0
+        
+    def empty(self):
+        return self.n == 0
+    
+    def inserir(self,valor):
+        #quero que seja O(1)
+        novo = No(valor)
+        novo.prox = self.head
+        self.head = novo
+        self.n+=1
+        
+    def remover(self,valor):
+        if self.empty():
+            return -1
+        if self.busca(valor):
+            return self.__remover(valor,self.head)
+        else:
+            return -1
+        
+    def __remover(self,valor,atual,anterior = None):
+        if atual is None:
+            return -1
+        else:
+            if anterior is None and atual.valor == valor:
+                aux = self.head.valor
+                self.head = self.head.prox
+                self.n-=1
+                return aux
+            
+            elif anterior is not None:
+                aux  = atual.valor
+                anterior.prox = atual.prox
+                self.n-=1
+                return aux
+            else:
+                self.__remover(valor,atual.prox,atual)
+    
+    def exibir(self):
+        self.__exibir(self.head)
+        
+    def __exibir(self,atual):
+        if atual is None:
+            return
+        else:
+            print(atual.valor,end = "->")
+            self.__exibir(atual.prox)
+
+    def busca(self,valor):
+        return self.__busca(valor,self.head)
+    
+    def __busca(self,valor,atual):
+        if atual is None:
+            return False
+        else:
+            if atual.valor == valor:
+                return True
+            else:
+                self.__busca(valor,atual.prox)
+        
+class TabelaHash:
+    """Implementação de uma tabela Hash usando endereçamento fechado com listas"""
+    def __init__(self,n=10):
+        self.n = n #número de elementos da tabela
+        self.tabela = [ListaEncadeada() for _ in range(n)] #Lista de listas
+
+    def __hash(self,chave):
+        """Função Hash"""
+        return hash(chave)%self.n
+
+    def inserir(self,chave):
+        """Insere uma chave na tabela"""
+        pos = self.__hash(chave)
+        self.tabela[pos].inserir(chave)
+
+    def buscar(self,chave):
+        """Busca uma chave na tabela"""
+        pos = self.__hash(chave)
+        return self.tabela[pos].busca(chave)
+
+    def remover(self,chave):
+        """Remove uma chave da tabela"""
+        pos = self.__hash(chave)
+        self.tabela[pos].remover(chave)
+
+    def exibir(self):
+        """Exibe o conteudo da tabela hash"""
+        resultado = []
+        for i,lista in enumerate(self.tabela):
+            resultado.append(f"{i}: {lista.exibir()}")
+        return "\n".join(resultado)
+
+tabela = TabelaHash(n=5)
+
+tabela.inserir("Ana")
+tabela.inserir("Carlos")
+tabela.inserir("Bia")
+tabela.inserir("João")
+
+tabela.exibir()
+
+print("\n")
+tabela.remover("Ana")
+tabela.exibir()
+    
+##A PARTIR DISSO FAZER MODIFICAR A TABELA COM ENDERAÇAMENTO ABERTO
