@@ -1,0 +1,89 @@
+#a ideia de grafos: um conjunto de pontos ou conjunto de nós conectados por linhas ou arestas
+#pode ser representado como muitas coisas
+#podemos fazer a representação gráfica usando simbolos, conjuntos ou matrizes
+#no conjunto temos que fazer dois conjuntos, o de vértices e o de arestas
+#de forma matricial, se temos n vértices, vamos ter uma matriz nxn
+#um grafo é uma estrutura formada por dois tipos de objetos, vértives e arestas
+#grafo dirigido: quando as arestas são dirigidas, ou seja, tem um caminho de ida, mas não de volta
+#dois vértices são chamados adjacentes caso exista uma aresta que une eles
+#grau de um vértice: número de arestas adjacentes(analisar o grau de entrada e o de saida grafo dirigido)
+#um grafo que tem o mesmo grau r para todos os vértices
+#quantidade de arestas: V*n/2 onde V é a quantidade de vértices e n é o grau de um vértice(isso se for um grafo regular)
+#complemento de um grafo: a conexão  entre pontos que não existe no grafo atual
+#grafos simples ou simplesmente grafos(grafo não dirigido, porém com pesos)
+#grafo simples não tem laços(arestas que sai de um vértice e chega nele mesmo)
+#também não terá arestas paralelas
+#grafo completo(aquele que existe uma aresta entre dois quaisquer pares de vértices)
+###Um grafo completo possui n(n-1)/2 arestas
+# Grafo trivial ou grafo nulo é aquele que só tem um único vértice
+# Grafo nulo é aquele que possui o conjunto de vértices vazio, nulo
+# Grafo regular é aquele que o conjunto de vértices possui um grau regular
+# Subgrafo é um subconjunto de um grafo completo, ou seja, podemos considerar um subgrafo como apenas uma parte dos conjuntos de vértices de um grafo completo
+# Matriz de adjacência: vamos criar uma matriz para representar o grafo de tal forma - caso haja uma aresta entre i e j, ele será 1, caso contrário será 0
+# grafo ponderado: aquele grafo que existem pesos, em que cada aresta tem seu valor próprio
+# em grafos dirigidos, devemos imaginar se existe um caminho explicito da "cidade" inicial para a "cidade" final
+# ###
+
+class Grafo:
+    """Grafo não dirigido"""
+    def __init__(self,v):
+        """Cria um grafo com v² vértices"""
+        self.adj = [[0]*v for __ in range(v)]
+        self.max_size = v**2
+        self.qte = 0
+        
+    def __str__(self):
+        """Rertorna em forma de string o grafo"""
+        lista = ''
+        numeracao = len(self.adj)
+        for c in range(1,numeracao+1):
+            lista += f"  {c}"
+        lista += "\n"
+        for c,n in enumerate(self.adj):
+            lista += f"{c} {n}\n"
+        return lista
+    
+    def empty(self):
+        """Diz se o grafo está vazio"""
+        return self.qte == 0
+    
+    def is_full(self):
+        """Diz se o grafo está cheio"""
+        return self.qte == self.max_size
+
+    def adicionar(self,ori,dest):
+        """Adiciona uma aresta entre os vértices ori e dest"""
+        if self.is_full():
+            print("Grafo cheio")
+            return -1
+        try:
+            self.adj[ori-1][dest-1] = 1
+            self.adj[dest-1][ori-1] = 1
+        except IndexError:
+            print("Posições inválidas")
+
+    def remocao(self,ori,dest):
+        """Remove uma areste entre os vértices ori e dest"""
+        if self.empty():
+            print("Grafo vazio!")
+            return -1
+        try:
+            self.adj[ori-1][dest-1] = 0
+            self.adj[dest-1][ori-1] = 0
+        
+        except IndexError:
+            print("Posições inválidas")
+
+#teste
+g = Grafo(5)
+print(g)
+g.adicionar(0,1)
+g.adicionar(0,4)
+g.adicionar(1,2)
+g.adicionar(1,3)
+g.adicionar(1,4)
+g.adicionar(2,3)
+g.adicionar(3,4)
+
+print(g)
+
